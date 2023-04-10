@@ -1,0 +1,12 @@
+# 개발 환경에서의 프로젝트 설정 값
+# Edit configurations에서 지정한 Active profiles를 dev에서 공백으로 설정 후
+# 애플리케이션 재 실행시 localhost:8080/api/health에서는 acriveProfiles이 공백일 것임
+# 이 때 밑과 같이 설정 시
+server:
+  port: 8081
+  servlet:
+    context-path : /dev
+
+# 기존 호출 URL은 실패하고, localhost:8081/{dev}/api/health의 출력 결과는
+# {"health":"ok", "activeProfiles" : ["dev"\}가 될 것임
+# 이처럼 각 설정값들을 override할 수 있음

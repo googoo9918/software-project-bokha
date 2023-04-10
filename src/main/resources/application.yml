@@ -1,0 +1,75 @@
+#default 프로젝트 설정 값
+# 실행하는 profile에 따라 yml에 default로 설정해둔 값이 오버라이드 됨
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+
+spring:
+  # todo 개발 데이터베이스 연결
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+
+  jpa:
+    hibernate:
+      ddl-auto: create # 애플리케이션 실행 시 기존 테이블 삭제 후 테이블 새로 생성
+      # 추후 validate나 none으로 변경할 것
+    show-sql: true # 콘솔창에 sql 출력
+    properties:
+      hibernate:
+        format_sql: true # sql 예쁘게 출력
+        default_batch_fetch_size: 500 # 일대다 컬렉션 조회 시 성능 최적화
+        # 쿼리에서 조건문 in절로 수행하게됨, n번 쿼리 수행 -> 1번 쿼리에서 수행(n개를 파라미터로 넣어줌)
+        # DB와 애플리케이션 부하를 고려해서 개수를 설정할 것
+        # oracle의 경우 최대 1000개
+    open-in-view: false # 영속성 컨텍스트의 생존 범위를 트랜잭션 범위로 한정
+    # 기본값 true -> View 랜더링 또는 API 요청일 경우 클라이언트 응답까지 영속성 컨텍스트 생존
+    # false 설정 시 -> 생존 범위가 트랜잭션 범위로 줄어들게 됨
+      # -> 컨트롤러에서 지연로딩으로 연관된 엔티티를 가져오려고 하면 에러 발생
+    # 영속성 컨텍스트를 오래 유지하면 DB Connection도 오래 갖고 있으므로 DB Connection이 부족할 수 있음
+      # -> 실시간 트래픽이 중요한 API 애플리케이션에서는 false로 유지할 것
+  servlet:
+    multipart:
+      max-file-size: 10MB # 파일 업로드 요청 시 하나의 파일 크기를 10MB 제한
+      max-request-size: 100MB # 파일 업로드 요청 시 모든 파일 크기합을 100MB 제한
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+#     swagger 사용을 위한 설정
+
+logging:
+  level:
+    org.hibernate.type: debug # 콘솔창에 조건에 바인딩되는 값 및 조회 결과 출력
+    com.app: debug # todo 패키지 수정
+#    spring cloud openfeign(외부 API 호출을 쉽게 할 수 있도록 도와줌)
+#    의 로그를 보기 위해서 프로젝트 루트 패키지 기준으로 debug 설정
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+# 3-way-handshake 과정의 시간 설정(5초)
+# 연결은 됐는데 요청한 서버에서 응답이 5초내로 오지 않으면 에러 발생(readTimeout)
+kakao:
+  client:
+    id: ENC(2VWXhZZPewn1zK6e3ODVGcHbYJLRUmCw6zd6oc4ITu+V7LETI9sxmLLHsYbcP6s1)
+#   RESTAPI 키를 복사
+    secret: ENC(uWuzB+AjzEhpdi6RMDgNfJW/KPSkTfTPRsIECN3H09rUM3q2doWVr1WBDY/jUGtz)
+#   보안 - 코드 값 복사
+
+token:
+  secret:  ENC(eIFwp/mynS6nbxDmqjNMzy+qVPlKB7H7LEk04Q85ggmsS34hVRDWl8BKiyg17HiF+KdNFuzF7S4=)
+  access-token-expiration-time: 900000  # 15분 1000(ms) x 60(s) x 15(m)
+  refresh-token-expiration-time: 1209600000 # 2주 1000(ms) x 60 (s) x 60(m) x 24(h) x 14(d)
+
+jasypt:
+  password: ${PASSWORD}
+#  vmoption에 지정됨
