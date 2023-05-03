@@ -1,8 +1,0 @@
-# 운영 환경에서의 프로젝트 설정 값
-spring:
-  # todo 운영 데이터베이스 연결
-
-logging:
-  level:
-    com.app: info # todo 패키지 수정
-#   운영환경에서는 요청이 많아서 debug로 설정할 경우 용량이 부족할 수 있음 -> info로 설정

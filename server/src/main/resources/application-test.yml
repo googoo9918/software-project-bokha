@@ -1,7 +1,0 @@
-# 테스트 환경에서의 프로젝트 설정 값
-spring:
-  datasource:
-    url: jdbc:h2:mem:test
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
