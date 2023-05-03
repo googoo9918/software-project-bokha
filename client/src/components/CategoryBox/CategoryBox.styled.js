@@ -4,13 +4,13 @@ import Button from '@mui/material/Button';
 export const CategoryBoxContainer = styled.div`
   font-size: 18px;
   width: 38rem;
-  height: 7.5em;
+  height: 8.1rem;
   border: 1px solid #bdbdbd;
 `;
 
 export const CategoryTitle = styled.div`
   width: inherit;
-  height: 2.4em;
+  height: 2.5rem;
   background-color: rgba(5, 117, 152, 0.25);
   position: relative;
 
@@ -26,13 +26,18 @@ export const CategoryTitle = styled.div`
 
 export const CategoryContent = styled.div`
   width: inherit;
+
+  .active {
+    background-color: #0057ff;
+    color: #fff;
+  }
 `
 
 export const CategoryBtn = styled(Button)`
   background-color: #ececec;
-  border-radius: 15px;
+  border-radius: 0.8rem;
   font-weight: 600;
   color: #7d7d7d;
-  padding: 4px 10px;
-  margin: 10px 4px;
+  padding: 0.2222rem 0.6rem;
+  margin: 0.5556rem 0.2222rem 0 0.3333rem;
 `;
