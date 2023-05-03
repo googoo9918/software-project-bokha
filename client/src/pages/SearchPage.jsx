@@ -1,4 +1,5 @@
 import CategoryBox from "../components/CategoryBox/CategoryBox";
+import EtcBox from "../components/EtcBox/EtcBox";
 import { useState } from "react";
 
 function SearchPage() {
@@ -22,6 +23,7 @@ function SearchPage() {
           buttons={interestList}
           state={interest}
           handler={setInterest}></CategoryBox>
+      <EtcBox></EtcBox>
     </div>
   )
 }
