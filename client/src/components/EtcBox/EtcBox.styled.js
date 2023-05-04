@@ -7,7 +7,7 @@ import {
 import Select from '@mui/material/Select';
 
 export const EtcBoxContainer = styled(CategoryBoxContainer)`
-  height: 12rem;
+  height: 13rem;
 `;
 
 export const EtcTitle = styled(CategoryTitle)``;
@@ -38,7 +38,7 @@ export const AgeBox = styled.div`
   justify-content: space-between;
   position: absolute;
   top: 1rem;
-  left: 1rem;
+  left: 1.5rem;
 
   #etc-age__box {
     width: 6rem;
@@ -72,7 +72,7 @@ export const RegionBox = styled.div`
   justify-content: space-between;
   position: absolute;
   top: 1rem;
-  left: 14rem;
+  left: 14.5rem;
 `;
 
 export const KeywordBox = styled.div`
@@ -81,7 +81,8 @@ export const KeywordBox = styled.div`
   justify-content: space-between;
   position: absolute;
   top: 4rem;
-  left: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
 
   #etc-keyword__input {
     width: 30rem;
@@ -91,3 +92,31 @@ export const KeywordBox = styled.div`
     padding-left: 10px;
   }
 `;
+
+export const ButtonBox = styled.div`
+  width: 23rem;
+  height: 2.6rem;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 7rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  .etc-footer__btn {
+    width: 11rem;
+    height: 2.6rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+  }
+
+  #etc-footer__btn-reset {
+    background-color: #d9d9d9;
+    color: #fff;
+  }
+
+  #etc-footer__btn-search {
+    background-color: rgba(5, 117, 152, 0.25);;
+    color: #000;
+  }
+`

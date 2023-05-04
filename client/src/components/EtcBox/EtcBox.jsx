@@ -5,13 +5,15 @@ import {
   RegionSelect,
   AgeBox,
   RegionBox,
-  KeywordBox
+  KeywordBox,
+  ButtonBox
 } from "./EtcBox.styled";
 import { StyledEngineProvider } from '@mui/styled-engine'
 import { 
   FormControl,
   InputLabel,
-  MenuItem
+  MenuItem,
+  Button
 } from '@mui/material';
 
 function EtcBox(props) {
@@ -24,6 +26,9 @@ function EtcBox(props) {
                   '서대문구', '마포구', '양천구', '강서구', '구로구', '금천구',
                   '영등포구', '동작구', '관악구', '서초구', '강남구', '송파구', '강동구'];
   
+  function resetHandler() {
+    window.location.reload();
+  }
 
   return(
     <StyledEngineProvider injectFirst>
@@ -100,6 +105,14 @@ function EtcBox(props) {
                 placeholder="검색어를 입력해주세요"
                 onChange={e => props.keywordHandler(e.target.value)}></input>
           </KeywordBox>
+          <ButtonBox>
+            <Button className="etc-footer__btn" 
+                    id="etc-footer__btn-reset"
+                    onClick={resetHandler}>초기화</Button>
+            <Button className="etc-footer__btn" 
+                    id="etc-footer__btn-search"
+                    onClick={props.submitHandler}>검색</Button>
+          </ButtonBox>
         </EtcContent>
       </EtcBoxContainer>
     </StyledEngineProvider>
