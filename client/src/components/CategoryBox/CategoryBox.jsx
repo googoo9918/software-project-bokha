@@ -5,7 +5,6 @@ import {
   CategoryBtn
 } from "./CategoryBox.styled";
 import { StyledEngineProvider } from '@mui/styled-engine'
-import { useState } from "react";
 
 function CategoryBox(props) {
   function btnClick(e) {

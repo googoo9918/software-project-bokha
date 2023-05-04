@@ -14,7 +14,7 @@ import {
   MenuItem
 } from '@mui/material';
 
-function EtcBox() {
+function EtcBox(props) {
   const sido = ['서울특별시', '부산광역시', '대구광역시', '인천광역시',
                 '광주광역시', '대전광역시', '울산광역시', '세종특별자치시',
                 '경기도', '강원도', '충청북도', '충청남도', '전라북도',
@@ -36,7 +36,11 @@ function EtcBox() {
             <div className="etc-label">나이</div>
             <div id="etc-age__box">
               <div className="etc-age__text" >만</div>
-              <input type="text" id="etc-age__input" placeholder="0"></input>
+              <input 
+                type="text" 
+                id="etc-age__input" 
+                placeholder="0"
+                onChange={e => props.ageHandler(Number(e.target.value))}></input>
               <div className="etc-age__text">세</div>
             </div>
           </AgeBox>
@@ -46,6 +50,7 @@ function EtcBox() {
               <InputLabel className="etc-region__input-label">시/도</InputLabel>
               <RegionSelect
                 label="시/도"
+                onChange={e => props.sidoHandler(sido[Number(e.target.value)])}
               >
                 {
                   sido &&
@@ -59,6 +64,7 @@ function EtcBox() {
               <InputLabel className="etc-region__input-label">시/군/구</InputLabel>
               <RegionSelect
                 label="시/군/구"
+                onChange={e => props.sidoHandler(seoulGu[Number(e.target.value)])}
               >
                 {
                   seoulGu &&
@@ -73,7 +79,8 @@ function EtcBox() {
             <div className="etc-label">키워드</div>
             <input type="text" 
                 id="etc-keyword__input"
-                placeholder="검색어를 입력해주세요"></input>
+                placeholder="검색어를 입력해주세요"
+                onChange={e => props.keywordHandler(e.target.value)}></input>
           </KeywordBox>
         </EtcContent>
       </EtcBoxContainer>

@@ -61,6 +61,7 @@ export const AgeBox = styled.div`
     border: none;
     text-align: right;
     outline: none;
+    color: #057598;
   }
 `;
 
