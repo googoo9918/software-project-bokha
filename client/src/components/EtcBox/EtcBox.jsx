@@ -50,12 +50,21 @@ function EtcBox(props) {
               <InputLabel className="etc-region__input-label">시/도</InputLabel>
               <RegionSelect
                 label="시/도"
-                onChange={e => props.sidoHandler(sido[Number(e.target.value)])}
+                onChange={e => props.sidoHandler(e.target.value)}
+                defaultValue="서울특별시"
               >
+                <MenuItem
+                  disabled
+                  value=''
+                  sx={{
+                    display: "none",
+                  }}>
+                  <em>-</em>
+                </MenuItem>
                 {
                   sido &&
                   sido.map((el, idx) => (
-                    <MenuItem value={idx} key={idx}>{el}</MenuItem>
+                    <MenuItem value={el} key={idx}>{el}</MenuItem>
                   ))
                 }
               </RegionSelect>
@@ -64,12 +73,21 @@ function EtcBox(props) {
               <InputLabel className="etc-region__input-label">시/군/구</InputLabel>
               <RegionSelect
                 label="시/군/구"
-                onChange={e => props.sidoHandler(seoulGu[Number(e.target.value)])}
+                onChange={e => props.sigunguHandler(e.target.value)}
+                defaultValue="동작구"
               >
+                <MenuItem
+                  disabled
+                  value=''
+                  sx={{
+                    display: "none",
+                  }}>
+                  <em>-</em>
+                </MenuItem>
                 {
                   seoulGu &&
                   seoulGu.map((el, idx) => (
-                    <MenuItem value={idx} key={idx}>{el}</MenuItem>
+                    <MenuItem value={el} key={idx}>{el}</MenuItem>
                   ))
                 }
               </RegionSelect>
