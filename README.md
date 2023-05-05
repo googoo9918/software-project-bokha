@@ -30,7 +30,7 @@
 
 ### 📍 핵심 기능
 
-<img src="https://user-images.githubusercontent.com/50830078/236378367-c2ee75ac-43a4-4ace-ad2b-0658225ec8f4.png" width="900" />
+<img src="https://user-images.githubusercontent.com/50830078/236378367-c2ee75ac-43a4-4ace-ad2b-0658225ec8f4.png" width="800" />
 
 |기능|설명|
 |--|--|
@@ -66,7 +66,7 @@
 
 ### ⚙ 소프트웨어 아키텍처
 
-<img src="https://user-images.githubusercontent.com/50830078/236378283-ce1bd71f-a81b-4cbc-b8fa-06b826666ca8.png" width="900" />
+<img src="https://user-images.githubusercontent.com/50830078/236378283-ce1bd71f-a81b-4cbc-b8fa-06b826666ca8.png" width="800" />
 
 ### 🔗 Reference
 
