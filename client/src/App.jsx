@@ -1,16 +1,17 @@
-import { Routes, Route } from "react-router-dom"
-import GlobalStyle from "./components/GlobalStyle/GlobalStyle"
-import SearchPage from "./pages/SearchPage"
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import { Routes, Route } from "react-router-dom";
+import GlobalStyle from "./components/GlobalStyle/GlobalStyle";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
-    <div className="App">
-      <GlobalStyle />
-      <Routes>
-        <Route path="/search" element={<SearchPage />}></Route>
-      </Routes>
-    </div>
-  )
+    <>
+      <Navbar />
+      <Outlet />
+      {/* <GlobalStyle /> */}
+    </>
+  );
 }
 
-export default App
+export default App;
