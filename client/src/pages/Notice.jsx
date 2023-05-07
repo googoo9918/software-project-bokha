@@ -1,5 +1,14 @@
 import React from "react";
+import Sidebar from "../components/Sidebar";
 
 export default function Notice() {
-  return <div>공지사항 및 질의응답 페이지 입니다.</div>;
+  return (
+    <Sidebar
+      items={[
+        { title: "공지사항📍" },
+        { title: "공지사항" },
+        { title: "질의응답" },
+      ]}
+    />
+  );
 }
