@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Button from '@mui/material/Button';
 
 export const CategoryBoxContainer = styled.div`
   font-size: 18px;
@@ -33,11 +32,13 @@ export const CategoryContent = styled.div`
   }
 `
 
-export const CategoryBtn = styled(Button)`
+export const CategoryBtn = styled.button`
+  height: 1.9444rem;
   background-color: #ececec;
   border-radius: 0.8rem;
   font-weight: 600;
   color: #7d7d7d;
-  padding: 0.2222rem 0.6rem;
+  padding: 0 0.6rem;
   margin: 0.5556rem 0.2222rem 0 0.3333rem;
+  border: 0;
 `;

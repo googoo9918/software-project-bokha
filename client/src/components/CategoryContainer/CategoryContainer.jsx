@@ -1,8 +1,9 @@
-import CategoryBox from "../components/CategoryBox/CategoryBox";
-import EtcBox from "../components/EtcBox/EtcBox";
+import { CategoryWrapper } from "./CategoryContainer.styled";
+import CategoryBox from "../CategoryBox/CategoryBox";
+import EtcBox from "../EtcBox/EtcBox";
 import { useState } from "react";
 
-export default function SearchPage() {
+export default function CategoryContainer() {
   const [household, setHousehold] = useState([]);
   const [interest, setInterest] = useState([]);
   const [age, setAge] = useState(0);
@@ -45,7 +46,7 @@ export default function SearchPage() {
   }
 
   return (
-    <div id="search-page">
+    <CategoryWrapper>
       <CategoryBox
         title="가구상황"
         buttons={householdList}
@@ -65,6 +66,6 @@ export default function SearchPage() {
         keywordHandler={setKeyword}
         submitHandler={submitHandler}
       ></EtcBox>
-    </div>
+    </CategoryWrapper>
   );
 }
