@@ -17,7 +17,7 @@ export default function Search() {
           { title: "음성 검색" },
         ]}
       />
-      {/* <SearchPage /> */}
+      <SearchPage />
       {/* <CategoryBox />
       <EtcBox /> */}
     </>
