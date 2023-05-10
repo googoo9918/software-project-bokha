@@ -6,6 +6,7 @@ import SearchPage from "./SearchPage";
 // import CategoryBox from "../components/CategoryBox/CategoryBox";
 // import EtcBox from "../components/EtcBox/EtcBox";
 // import Paper from "../components/Paper";
+import ProgramCard from "../components/ProgramCard/ProgramCard";
 
 export default function Search() {
   return (
@@ -17,6 +18,7 @@ export default function Search() {
           { title: "음성 검색" },
         ]}
       />
+      <ProgramCard />
       {/* <SearchPage /> */}
       {/* <CategoryBox />
       <EtcBox /> */}
