@@ -1,0 +1,76 @@
+{
+  "kind": "bokha#noticeListResponse",
+  "etag": "asdlfjalsdjfaoaajsif",
+  "items": [
+    {
+      "kind": "bokha#noticeResult",
+      "etag": "iuXeoSQwO2BaasAtUhDSINgUbc",
+      "id": {
+        "kind": "bokha#notice",
+        "noticeId": "eIh2S0ZahI"
+      },
+      "snippet": {
+        "publishedAt": "2023.03.26",
+        "title": "2023년 보육료 양육비 지원 안내",
+        "description": "화이팅",
+        "publishTime": "2023.03.26"
+      }
+    },
+    {
+      "kind": "bokha#noticeResult",
+      "etag": "iuXeoSQwO2deBAtUhDSINgUbc",
+      "id": {
+        "kind": "bokha#notice",
+        "noticeId": "eIh2S0ZahI"
+      },
+      "snippet": {
+        "publishedAt": "2023.03.25",
+        "title": "부모 급여 신청 안내",
+        "description": "화이팅",
+        "publishTime": "2023.03.25"
+      }
+    },
+    {
+      "kind": "bokha#noticeResult",
+      "etag": "iuXeoSQwdfO2BAtUhDSINgUbc",
+      "id": {
+        "kind": "bokha#notice",
+        "noticeId": "eIh2S0ZahI"
+      },
+      "snippet": {
+        "publishedAt": "2023.05.02",
+        "title": "청년내일저축계좌 신청 안내",
+        "description": "화이팅",
+        "publishTime": "2023.05.02"
+      }
+    },
+    {
+      "kind": "bokha#noticeResult",
+      "etag": "iuXeoSQwO2BAtUhDsdfSINgUbc",
+      "id": {
+        "kind": "bokha#notice",
+        "noticeId": "eIh2S0ZahI"
+      },
+      "snippet": {
+        "publishedAt": "2023.04.10",
+        "title": "장애인등록증 교통기능 전국호환 관련 질의&답변",
+        "description": "화이팅",
+        "publishTime": "2023.04.10"
+      }
+    },
+    {
+      "kind": "bokha#noticeResult",
+      "etag": "iuXeoSQwO2BAtUhDssSINgUbc",
+      "id": {
+        "kind": "bokha#notice",
+        "noticeId": "eIh2S0ZahI"
+      },
+      "snippet": {
+        "publishedAt": "2023.01.01",
+        "title": "2023년에는 모든 소망 다 이루든지 말든지 알아서 하세요!",
+        "description": "화이팅",
+        "publishTime": "2023.01.01"
+      }
+    }
+  ]
+}
