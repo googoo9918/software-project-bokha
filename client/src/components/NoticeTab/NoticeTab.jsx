@@ -16,12 +16,9 @@ export default function NoticeTab() {
 
   return (
     <NoticeContainer>
-      {noticeList.map(
-        (notice, i) => (
-          <NoticeBox notice={notice} key={i} />
-        )
-        // console.log(notice)
-      )}
+      {noticeList.map((notice, i) => (
+        <NoticeBox notice={notice} key={i} />
+      ))}
     </NoticeContainer>
   );
 }
