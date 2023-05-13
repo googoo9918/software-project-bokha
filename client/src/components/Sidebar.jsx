@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
 import { Box, Button, Typography } from "@mui/material";
@@ -24,6 +24,7 @@ const useStyles = makeStyles({
   navbarMenu: {
     fontSize: 35,
     marginTop: 20,
+    marginBottom: 20,
     color: "black",
   },
 });
@@ -33,19 +34,22 @@ export default function Sidebar(props) {
   const classes = useStyles();
   const sidebarMenu = items.slice(1);
 
+  const [selectedSidebarMenu, setSelectedSidebarMenu] = useState(null);
+  const handleMenuClick = (item) => {
+    props.setSelectedItem(item);
+  };
+
   return (
     <Box className={classes.root}>
       <Box>
-        <Button>
-          <Box variant="h4" className={classes.navbarMenu}>
-            {items[0].title}
-          </Box>
-        </Button>
+        <Box variant="h4" className={classes.navbarMenu}>
+          {items[0].title}
+        </Box>
         <Box className={classes.divider} />
       </Box>
       {sidebarMenu.map((item, index) => (
         <Box key={index}>
-          <Button>
+          <Button onClick={() => handleMenuClick(item.title)}>
             <Box variant="h6" className={classes.header}>
               {item.title}
             </Box>
