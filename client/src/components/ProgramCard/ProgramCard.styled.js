@@ -33,6 +33,7 @@ export const CardContainer = styled.div`
     bottom: 1.3125rem;
     left: 50%;
     transform: translateX(-50%);
+    cursor: pointer;
   }
 `;
 
