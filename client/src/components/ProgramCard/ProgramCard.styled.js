@@ -7,7 +7,7 @@ export const CardContainer = styled.div`
   border-radius: 10px;
   position: absolute;
   // 추후 수정
-  top: 10rem;
+  top: 50rem;
   left: 25rem;
 
   #program-detail-short {
