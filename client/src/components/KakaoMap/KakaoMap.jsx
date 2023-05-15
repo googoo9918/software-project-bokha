@@ -7,11 +7,11 @@ const { kakao } = window;
 export default function KakaoMap() {
   const [welfareFacilities, setWelfareFacilities] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("복지 시설 위,경도 받아옴")
-      .then((res) => setWelfareFacilities(res.data));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("복지 시설 위,경도 받아옴")
+  //     .then((res) => setWelfareFacilities(res.data));
+  // }, []);
 
   useEffect(() => {
     const container = document.getElementById("map");

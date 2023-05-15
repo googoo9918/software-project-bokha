@@ -8,6 +8,7 @@ import Search from "./pages/Search.jsx";
 import Map from "./pages/Map.jsx";
 import Notice from "./pages/Notice.jsx";
 import Mypage from "./pages/Mypage.jsx";
+import DetailPage from "./pages/DetailPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "/map", element: <Map /> },
       { path: "/notice", element: <Notice /> },
       { path: "/mypage", element: <Mypage /> },
+      { path: "/search/:programIdx", element: <DetailPage /> },
     ],
   },
 ]);
