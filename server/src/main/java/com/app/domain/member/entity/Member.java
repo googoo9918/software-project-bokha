@@ -3,18 +3,17 @@ package com.app.domain.member.entity;
 import com.app.domain.common.BaseEntity;
 import com.app.domain.member.constant.MemberType;
 import com.app.domain.member.constant.Role;
+import com.app.domain.member.constant.Status;
 import com.app.global.jwt.dto.JwtTokenDto;
 import com.app.global.util.DateTimeUtils;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseEntity {
 
@@ -35,14 +34,18 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 20)
     private String memberName;
 
-    @Column(length = 200)
-    private String profile;
-    // 해당 회원의 프로필 사진 주소 저장
+    @Column(length = 10)
+    private int age;
+    //회원 나이 저장
+
+    @Column(length = 50)
+    private String region;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private Role role;
-    // 따로 권한테이블을 두어서 여러 역할을 가질 수 있도록 설정할 수도 있음
-    // 현재는 한개만 갖도록 구성(일반 유저와 Admin 유저로 구분)
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Status status;
     @Column(length = 250)
     private String refreshToken;
     // 리프레쉬 토큰
@@ -50,12 +53,13 @@ public class Member extends BaseEntity {
     // 토큰 만료 시간
     @Builder
     public Member(MemberType memberType, String email, String password, String memberName,
-                  String profile, Role role) {
+                  int age, String region, Role role) {
         this.memberType = memberType;
         this.email = email;
         this.password = password;
         this.memberName = memberName;
-        this.profile = profile;
+        this.age = age;
+        this.region = region;
         this.role = role;
     }
 

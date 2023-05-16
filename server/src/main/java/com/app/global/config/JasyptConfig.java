@@ -16,6 +16,8 @@ public class JasyptConfig {
     @Value("${jasypt.password}")
     private String password;
 
+    public String getPassword(){return password;}
+
     @Bean
     public PooledPBEStringEncryptor jasyptStringEncryptor() {
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
