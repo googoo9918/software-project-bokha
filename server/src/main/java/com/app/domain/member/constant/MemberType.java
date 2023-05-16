@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public enum MemberType {
 
-    KAKAO;
+    KAKAO, DEFAULT;
 
     public static MemberType from(String type) {
         return MemberType.valueOf(type.toUpperCase());
