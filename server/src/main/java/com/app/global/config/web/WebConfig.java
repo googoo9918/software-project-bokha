@@ -56,7 +56,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/logout", //로그아웃
                         "/api/access-token/issue", // Access 토큰 재발급
                         "/api/members/new", //회원가입
-                        "/api/members/login" //자체 로그인
+                        "/api/members/login", //자체 로그인
+                        "/api/programs/list"
                 ); // 인증 인터셉터를 동작시키지 않을 예외적인 uri 작성
 
         registry.addInterceptor(adminAuthorizationInterceptor) //인증 인터셉터 다음 인가 인터셉터 실행
