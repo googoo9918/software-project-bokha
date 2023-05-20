@@ -52,8 +52,9 @@ public class Member extends BaseEntity {
     private LocalDateTime tokenExpirationTime;
     // 토큰 만료 시간
     @Builder
-    public Member(MemberType memberType, String email, String password, String memberName,
+    public Member(Long memberId, MemberType memberType, String email, String password, String memberName,
                   int age, String region, Role role) {
+        this.memberId = memberId;
         this.memberType = memberType;
         this.email = email;
         this.password = password;
