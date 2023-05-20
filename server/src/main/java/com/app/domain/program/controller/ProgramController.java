@@ -4,7 +4,6 @@ import com.app.domain.common.SingleResponseDto;
 import com.app.domain.program.client.ProgramRetrieveClient;
 import com.app.domain.program.dto.ProgramDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -19,27 +18,42 @@ public class ProgramController {
     private final ProgramRetrieveClient programRetrieveClient;
 
     @GetMapping("/list")
-    public ResponseEntity getPrograms(@ModelAttribute ProgramDto.Request request){
-        ProgramDto.Request programRequestDto = ProgramDto.Request.builder()
-                .pageNo(request.getPageNo())
-                .numOfRows(request.getNumOfRows())
-                .lifeArray(request.getLifeArray())
-                .trgterIndvdlArray(request.getTrgterIndvdlArray())
-                .intrsThem(request.getIntrsThem())
-                .age(request.getAge())
-                .ctpvNm(request.getCtpvNm())
-                .sggNM(request.getSggNM())
-                .srchKeyCode(request.getSrchKeyCode())
-                .searchWrd(request.getSearchWrd())
-                .arrgOrd(request.getArrgOrd())
+    public ResponseEntity getPrograms(@ModelAttribute ProgramDto.ListRequest listRequest){
+        ProgramDto.ListRequest programListRequestDto = ProgramDto.ListRequest.builder()
+                .serviceKey(listRequest.getServiceKey())
+                .pageNo(listRequest.getPageNo())
+                .numOfRows(listRequest.getNumOfRows())
+                .lifeArray(listRequest.getLifeArray())
+                .trgterIndvdlArray(listRequest.getTrgterIndvdlArray())
+                .intrsThem(listRequest.getIntrsThem())
+                .age(listRequest.getAge())
+                .ctpvNm(listRequest.getCtpvNm())
+                .sggNM(listRequest.getSggNM())
+                .srchKeyCode(listRequest.getSrchKeyCode())
+                .searchWrd(listRequest.getSearchWrd())
+                .arrgOrd(listRequest.getArrgOrd())
                 .build();
 
         System.out.println("=========================================");
-        System.out.println(programRequestDto.getNumOfRows());
+        System.out.println(programListRequestDto.getServiceKey());
         System.out.println("=========================================");
-        ProgramDto.Response programResponse = programRetrieveClient.getList(programRequestDto);
+        ProgramDto.ListResponse programListResponse = programRetrieveClient.getList(programListRequestDto);
         return new ResponseEntity<>(
-                new SingleResponseDto<>(programResponse), HttpStatus.OK
+                new SingleResponseDto<>(programListResponse), HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/detail")
+    public ResponseEntity getProgramDetails(@ModelAttribute ProgramDto.DetailRequest detailRequest){
+        ProgramDto.DetailRequest programdEtailRequestDto = ProgramDto.DetailRequest.builder()
+                .serviceKey(detailRequest.getServiceKey())
+                .servId(detailRequest.getServId())
+                .build();
+
+        ProgramDto.DetailedResponse programDetailResponse = programRetrieveClient.getDetailed(programdEtailRequestDto);
+
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(programDetailResponse), HttpStatus.OK
         );
     }
 }

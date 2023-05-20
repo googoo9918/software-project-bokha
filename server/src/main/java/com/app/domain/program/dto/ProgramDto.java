@@ -15,7 +15,9 @@ public class ProgramDto {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Request{
+    public static class ListRequest {
+        //서비스 인증키
+        private String serviceKey;
 
         //페이지 시작 위치
         private String pageNo;
@@ -51,6 +53,17 @@ public class ProgramDto {
         private String arrgOrd;
     }
 
+    @Builder
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class DetailRequest {
+        //서비스 인증키
+        private String serviceKey;
+        //서비스 Id
+        private String servId;
+    }
     @ToString
     @Builder
     @Getter
@@ -58,7 +71,7 @@ public class ProgramDto {
     @NoArgsConstructor
     @XmlRootElement(name = "wantedList")
     @XmlAccessorType(XmlAccessType.FIELD)
-    public static class Response {
+    public static class ListResponse {
         //전체 결과 수
         @XmlElement(name = "totalCount")
         private String totalCount;
@@ -79,7 +92,7 @@ public class ProgramDto {
         @XmlElement(name = "resultMessage")
         private String resultMessage;
 
-        //
+        //데이터 목록
         @XmlElement(name = "servList")
         private List<ServList> servList;
     }
@@ -148,5 +161,150 @@ public class ProgramDto {
         // 가구 상황명
         @XmlElement(name = "trgterIndvdlNmArray")
         private String trgterIndvdlNmArray;
+    }
+
+    @XmlRootElement(name = "wantedDtl")
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class DetailedResponse{
+        //결과코드
+        @XmlElement private String resultCode;
+        //결과 메시지
+        @XmlElement private String resultMessage;
+        //서비스Id
+        @XmlElement private String servId;
+
+        //서비스명
+        @XmlElement private String servNm;
+
+        //시행시작일자
+        @XmlElement private String enfcBgngYmd;
+
+        //시행종료일자
+        @XmlElement private String enfcEndYmd;
+
+        //사업담당부서명
+        @XmlElement private String bizChrDeptNm;
+
+        //시도명
+        @XmlElement private String ctpvNm;
+
+        //시군구명
+        @XmlElement private String sggNm;
+
+        //서비스 요약
+        @XmlElement private String servDgst;
+
+        //생애주기명
+        @XmlElement private String lifeNmArray;
+
+        //가구상황명
+        @XmlElement private String trgterIndvdlNmArray;
+
+        //관심주제명
+        @XmlElement private String intrsThemaNmArray;
+
+        //지원주기명
+        @XmlElement private String sprtCycNm;
+
+        //제공유형명
+        @XmlElement private String srvPvsnNm;
+
+        //신청방법명
+        @XmlElement private String aplyMtdNm;
+
+        //지원대상 내용
+        @XmlElement private String sprtTrgtCn;
+
+        //선정기준 내용
+        @XmlElement private String slctCritCn;
+
+        //급여서비스 내용
+        @XmlElement private String alwServCn;
+
+        //신청방법 내용
+        @XmlElement private String aplyMtdCn;
+
+        //조회수
+        @XmlElement private String inqNum;
+
+        //최종 수정일자
+        @XmlElement private String lastModYmd;
+
+        // 문의처 목록
+        @XmlElement(name = "inqplCtadrList")
+        private List<InqplCtadr> inqplCtadrList;
+
+        //관련웹사이트 목록
+        @XmlElement(name = "inqplHmpgReldList")
+        private List<InqplHmpgReld> inqplHmpgReldList;
+
+        //근거법령 목록
+        @XmlElement(name = "baslawList")
+        private List<Baslaw> baslawList;
+
+        //서식, 자료 목록
+        @XmlElement(name = "basfrmList")
+        private List<Basfrm> basfrmList;
+    }
+
+    @NoArgsConstructor
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @Getter
+    public static class InqplCtadr {
+        //복지정보관련명
+        @XmlElement private String wlfareInfoReldNm;
+
+        //복지정보관련내용
+        @XmlElement private String wlfareInfoReldCn;
+
+        //복지정보상세코드
+        @XmlElement private String wlfareInfoDtlCd;
+    }
+
+    @NoArgsConstructor
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @Getter
+    public static class InqplHmpgReld {
+
+        //복지정보관련명
+        @XmlElement private String wlfareInfoReldNm;
+
+        //복지정보관련내용
+        @XmlElement private String wlfareInfoReldCn;
+
+        //복지정보상세코드
+        @XmlElement private String wlfareInfoDtlCd;
+    }
+
+    @NoArgsConstructor
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @Getter
+    public static class Baslaw {
+        //복지정보상세코드
+        @XmlElement private String wlfareInfoDtlCd;
+
+        //복지정보관련명
+        @XmlElement private String wlfareInfoReldNm;
+
+        //복지정보관련내용
+        @XmlElement private String wlfareInfoReldCn;
+    }
+
+    @NoArgsConstructor
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @Getter
+    public static class Basfrm {
+        //복지정보상세코드
+        @XmlElement private String wlfareInfoDtlCd;
+
+        //복지정보관련명
+        @XmlElement private String wlfareInfoReldNm;
+
+        //복지정보관련내용
+        @XmlElement private String wlfareInfoReldCn;
     }
 }

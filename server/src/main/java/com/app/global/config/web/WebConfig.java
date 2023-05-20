@@ -57,7 +57,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/access-token/issue", // Access 토큰 재발급
                         "/api/members/new", //회원가입
                         "/api/members/login", //자체 로그인
-                        "/api/programs/list"
+                        "/api/programs/list", // 프로그램 목록 조회
+                        "/api/programs/detail" // 프로그램 상세 조회
                 ); // 인증 인터셉터를 동작시키지 않을 예외적인 uri 작성
 
         registry.addInterceptor(adminAuthorizationInterceptor) //인증 인터셉터 다음 인가 인터셉터 실행
