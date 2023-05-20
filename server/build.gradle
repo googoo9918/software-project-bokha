@@ -16,6 +16,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven { url 'https://jitpack.io' }
 }
 
 ext {
@@ -32,7 +33,11 @@ dependencies {
 //	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 //	implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA' //entityManagerFactory의 bean을 생성
 
+	implementation 'com.github.shin285:KOMORAN:3.3.9'
 	implementation 'org.apache.commons:commons-text:1.8'
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.1'
+	implementation("com.google.guava:guava:31.1-jre")
 	implementation 'com.navercorp.lucy:lucy-xss-servlet:2.0.0'
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	compileOnly 'org.projectlombok:lombok'
