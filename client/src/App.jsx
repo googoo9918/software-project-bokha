@@ -5,10 +5,10 @@ import { useLocation } from "react-router-dom";
 import GlobalStyle from "./components/GlobalStyle/GlobalStyle";
 
 function App() {
-  const isHome = location.pathname === "/";
+  // const isHome = location.pathname === "/";
   return (
     <>
-      {!isHome && <Navbar />}
+      <Navbar />
       <Outlet />
       <GlobalStyle />
     </>
