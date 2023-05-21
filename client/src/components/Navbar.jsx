@@ -3,10 +3,11 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Toolbar from "./Toolbar";
 import AppBar from "./Appbar";
+import styled from "styled-components";
 
 const rightLink = {
   fontSize: 24,
-  color: "common.white",
+  color: "#000000",
   ml: 3,
 };
 
@@ -18,7 +19,7 @@ export default function Navbar() {
           <Link
             variant="h6"
             underline="none"
-            color="inherit"
+            color="#000000"
             href="/"
             sx={{ fontSize: 28 }}
           >
@@ -76,7 +77,7 @@ export default function Navbar() {
             }}
           >
             <Link
-              color="inherit"
+              color="#000000"
               variant="h6"
               underline="none"
               href="/sign-in"
@@ -85,7 +86,7 @@ export default function Navbar() {
               {"Sign In"}
             </Link>
             <Link
-              color="inherit"
+              color="#000000"
               variant="h6"
               underline="none"
               href="/sign-up"

@@ -6,7 +6,8 @@ function AppBar(props) {
     <MuiAppBar
       elevation={0}
       position="fixed"
-      sx={{ backgroundColor: "#69696a" }}
+      z-index="5"
+      sx={{ backgroundColor: "#CEE5D0" }}
       {...props}
     />
   );
