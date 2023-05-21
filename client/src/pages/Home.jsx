@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import HomePage from "../HomePage/HomePage";
 
 export default function Home() {
-  return <div>메인 페이지 입니다.</div>;
+  return (
+    <>
+      <HomePage />
+    </>
+  );
 }
