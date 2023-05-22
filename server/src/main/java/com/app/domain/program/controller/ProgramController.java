@@ -65,6 +65,28 @@ public class ProgramController {
     }
 
     /**
+     * 회원 별 프로그램 추천
+     */
+    @GetMapping("/recommendlist")
+    public ResponseEntity getPrograms(@ModelAttribute ProgramDto.RecommendListRequest recommendListRequest, HttpServletRequest httpServletRequest){
+        Member member = memberService.getLoginMember(httpServletRequest);
+        ProgramDto.RecommendListRequest programRecommendListRequestDto = ProgramDto.RecommendListRequest.builder()
+                .serviceKey(recommendListRequest.getServiceKey())
+                .pageNo(recommendListRequest.getPageNo())
+                .numOfRows(recommendListRequest.getNumOfRows())
+                .age(member.getAge())
+                .ctpvNm(member.getRegion())
+                .arrgOrd(recommendListRequest.getArrgOrd())
+                .build();
+
+        ProgramDto.ListResponse programListResponse = programRetrieveClient.getRecommendList(programRecommendListRequestDto);
+
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(programListResponse), HttpStatus.OK
+        );
+    }
+
+    /**
      * 프로그램 상세 조회
      * @param detailRequest
      * @return
@@ -102,6 +124,13 @@ public class ProgramController {
     }
 
 
+    /**
+     * 즐겨찾기한 프로그램 조회 기능
+     * @param request
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping("savelist")
     public ResponseEntity getSavePrograms(HttpServletRequest request,
                                           @Positive @RequestParam(defaultValue = "1") int page,

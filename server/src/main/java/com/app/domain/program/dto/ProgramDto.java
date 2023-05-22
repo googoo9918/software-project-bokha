@@ -60,6 +60,31 @@ public class ProgramDto {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
+    public static class RecommendListRequest{
+        //서비스 인증키
+        private String serviceKey;
+
+        //페이지 시작 위치
+        private String pageNo;
+
+        //출력건수
+        private String numOfRows;
+
+        //나이
+        private String age;
+
+        //시도명
+        private String ctpvNm;
+
+        //정렬순서
+        private String arrgOrd;
+    }
+
+    @Builder
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class DetailRequest {
         //서비스 인증키
         private String serviceKey;

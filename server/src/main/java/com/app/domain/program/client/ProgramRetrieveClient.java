@@ -16,4 +16,7 @@ public interface ProgramRetrieveClient {
     @GetMapping(value = "LcgvWelfaredetailed", produces = MediaType.APPLICATION_XML_VALUE)
     ProgramDto.DetailedResponse getDetailed(@SpringQueryMap ProgramDto.DetailRequest detailRequest);
 
+    @GetMapping(value = "LcgvWelfarelist",produces = MediaType.APPLICATION_XML_VALUE)
+    ProgramDto.ListResponse getRecommendList(@SpringQueryMap ProgramDto.RecommendListRequest recommendListRequest);
+
 }

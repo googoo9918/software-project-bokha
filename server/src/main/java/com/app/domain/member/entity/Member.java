@@ -35,7 +35,7 @@ public class Member extends BaseEntity {
     private String memberName;
 
     @Column(length = 10)
-    private int age;
+    private String age;
     //회원 나이 저장
 
     @Column(length = 50)
@@ -53,7 +53,7 @@ public class Member extends BaseEntity {
     // 토큰 만료 시간
     @Builder
     public Member(Long memberId, MemberType memberType, String email, String password, String memberName,
-                  int age, String region, Role role) {
+                  String age, String region, Role role) {
         this.memberId = memberId;
         this.memberType = memberType;
         this.email = email;
