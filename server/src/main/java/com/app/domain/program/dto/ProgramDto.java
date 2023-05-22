@@ -70,6 +70,9 @@ public class ProgramDto {
         //출력건수
         private String numOfRows;
 
+        //생애주기
+        private String lifeArray;
+
         //나이
         private String age;
 

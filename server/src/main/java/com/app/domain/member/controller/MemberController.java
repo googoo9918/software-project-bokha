@@ -4,6 +4,7 @@ package com.app.domain.member.controller;
 import com.app.api.login.validator.OauthValidator;
 import com.app.domain.common.MultiResponseDto;
 import com.app.domain.common.SingleResponseDto;
+import com.app.domain.member.constant.Role;
 import com.app.global.error.ErrorCode;
 import com.app.domain.member.dto.MemberDto;
 import com.app.domain.member.entity.Member;
@@ -133,6 +134,10 @@ public class MemberController {
     //회원 삭제
     @PatchMapping("/delete/{memberId}")
     public ResponseEntity deleteMember(@PathVariable("memberId") @Positive Long memberId){
+        Member member = memberService.findVerifiedMemberByMemberId(memberId);
+        if(member.getRole() == Role.ADMIN){
+            throw new AuthenticationException(ErrorCode.ADMIN_NOT_DELETE);
+        }
         memberService.deleteMember(memberId);
 
         return new ResponseEntity<>(HttpStatus.OK);

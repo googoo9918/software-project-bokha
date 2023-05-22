@@ -76,6 +76,7 @@ public class ProgramController {
                 .numOfRows(recommendListRequest.getNumOfRows())
                 .age(member.getAge())
                 .ctpvNm(member.getRegion())
+                .lifeArray(recommendListRequest.getLifeArray())
                 .arrgOrd(recommendListRequest.getArrgOrd())
                 .build();
 
