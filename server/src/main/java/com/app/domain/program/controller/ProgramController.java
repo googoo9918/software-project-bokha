@@ -1,13 +1,26 @@
 package com.app.domain.program.controller;
 
+import com.app.domain.common.MultiResponseDto;
 import com.app.domain.common.SingleResponseDto;
+import com.app.domain.member.entity.Member;
+import com.app.domain.member.service.MemberService;
 import com.app.domain.program.client.ProgramRetrieveClient;
 import com.app.domain.program.dto.ProgramDto;
+import com.app.domain.program.entity.Program;
+import com.app.domain.program.mapper.ProgramMapper;
+import com.app.domain.program.service.ProgramService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Positive;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/programs")
@@ -17,6 +30,17 @@ public class ProgramController {
 
     private final ProgramRetrieveClient programRetrieveClient;
 
+    private final ProgramService programService;
+
+    private final ProgramMapper programMapper;
+
+    private final MemberService memberService;
+
+    /**
+     * 프로그램 목록 조회
+     * @param listRequest
+     * @return
+     */
     @GetMapping("/list")
     public ResponseEntity getPrograms(@ModelAttribute ProgramDto.ListRequest listRequest){
         ProgramDto.ListRequest programListRequestDto = ProgramDto.ListRequest.builder()
@@ -34,15 +58,17 @@ public class ProgramController {
                 .arrgOrd(listRequest.getArrgOrd())
                 .build();
 
-        System.out.println("=========================================");
-        System.out.println(programListRequestDto.getServiceKey());
-        System.out.println("=========================================");
         ProgramDto.ListResponse programListResponse = programRetrieveClient.getList(programListRequestDto);
         return new ResponseEntity<>(
                 new SingleResponseDto<>(programListResponse), HttpStatus.OK
         );
     }
 
+    /**
+     * 프로그램 상세 조회
+     * @param detailRequest
+     * @return
+     */
     @GetMapping("/detail")
     public ResponseEntity getProgramDetails(@ModelAttribute ProgramDto.DetailRequest detailRequest){
         ProgramDto.DetailRequest programdEtailRequestDto = ProgramDto.DetailRequest.builder()
@@ -55,5 +81,39 @@ public class ProgramController {
         return new ResponseEntity<>(
                 new SingleResponseDto<>(programDetailResponse), HttpStatus.OK
         );
+    }
+
+
+    /**
+     * 프로그램 즐겨찾기 기능
+     * @param saveRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/save")
+    public ResponseEntity saveProgram(@RequestBody ProgramDto.SaveRequest saveRequest, HttpServletRequest request){
+        Member member = memberService.getLoginMember(request);
+        Program program = programService.saveProgram(programMapper.SaveRequestToProgram(saveRequest), member);
+        ProgramDto.SaveResponse saveResponse = programMapper.programToSaveResponse(program);
+
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(saveResponse), HttpStatus.OK
+        );
+    }
+
+
+    @GetMapping("savelist")
+    public ResponseEntity getSavePrograms(HttpServletRequest request,
+                                          @Positive @RequestParam(defaultValue = "1") int page,
+                                          @Positive @RequestParam(defaultValue = "10") int size){
+        Member member = memberService.getLoginMember(request);
+        Long memberId = member.getMemberId();
+        System.out.println(memberId);
+        Page<Program> programPage = programService.searchSavePrograms(memberId, page-1, size);
+        List<Program> programList =programPage.getContent();
+        List<ProgramDto.SaveResponse> response = programMapper.programsToSaveResponses(programList);
+
+        return new ResponseEntity<>(new MultiResponseDto<>(response, programPage), HttpStatus.OK);
+
     }
 }

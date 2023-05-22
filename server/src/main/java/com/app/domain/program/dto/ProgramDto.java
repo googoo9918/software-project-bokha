@@ -1,7 +1,9 @@
 package com.app.domain.program.dto;
 
+import com.app.domain.program.entity.Program;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -306,5 +308,78 @@ public class ProgramDto {
 
         //복지정보관련내용
         @XmlElement private String wlfareInfoReldCn;
+    }
+
+    @Getter
+    public static class SaveRequest {
+
+        //서비스 Id
+        @NotBlank
+        private String servId;
+
+        //서비스명
+        private String servNm;
+
+        //서비스 요약
+        private String servDgst;
+
+        //지원주기
+        private String sprtCycnm;
+
+        //제공유형
+        private String srvPvsnNm;
+
+        //신청방법
+        private String aplyMtdNm;
+
+        //지자체 정보
+        private String ctpvNm;
+    }
+
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class SaveResponse {
+        //프로그램 pk(자체 db 저장)
+        private Long programId;
+        //서비스 Id
+        @NotBlank
+        private String servId;
+
+        //회원 Id
+        private Long memberId;
+
+        //서비스명
+        private String servNm;
+
+        //서비스 요약
+        private String servDgst;
+
+        //지원주기
+        private String sprtCycnm;
+
+        //제공유형
+        private String srvPvsnNm;
+
+        //신청방법
+        private String aplyMtdNm;
+
+        //지자체 정보
+        private String ctpvNm;
+
+        public static SaveResponse ofProgram(Program program){
+            return SaveResponse.builder()
+                    .programId(program.getProgramId())
+                    .servId(program.getServId())
+                    .memberId(program.getMember().getMemberId())
+                    .servNm(program.getServNm())
+                    .servDgst(program.getServDgst())
+                    .sprtCycnm(program.getSprtCycnm())
+                    .srvPvsnNm(program.getSrvPvsnNm())
+                    .aplyMtdNm(program.getAplyMtdNm())
+                    .ctpvNm(program.getCtpvNm()).build();
+        }
     }
 }

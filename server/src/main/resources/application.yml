@@ -17,7 +17,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create # 애플리케이션 실행 시 기존 테이블 삭제 후 테이블 새로 생성
+      ddl-auto: update # 애플리케이션 실행 시 기존 테이블 삭제 후 테이블 새로 생성
       # 추후 validate나 none으로 변경할 것
     show-sql: true # 콘솔창에 sql 출력
     properties:
