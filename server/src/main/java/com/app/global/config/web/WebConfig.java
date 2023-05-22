@@ -34,7 +34,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("*")
                 .allowedMethods(
                         //별표(*) 사용 시 모든 오리진 허용 및 콤마로 여러 origin을 설정할 수도 있음
-                        //즉, locathost:8082로 시작하는 엔드포인트에서 /api/**으로 아래 요청을 보내는 것을 허용함
+                        //즉, locathost:8080로 시작하는 엔드포인트에서 /api/**으로 아래 요청을 보내는 것을 허용함
                         HttpMethod.GET.name(),
                         HttpMethod.POST.name(),
                         HttpMethod.PUT.name(),
@@ -58,12 +58,16 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/members/new", //회원가입
                         "/api/members/login", //자체 로그인
                         "/api/programs/list", // 프로그램 목록 조회
-                        "/api/programs/detail" // 프로그램 상세 조회
+                        "/api/programs/detail", // 프로그램 상세 조회
+                        "/api/post/list", //글 전체 조회
+                        "/api/post/{post-id}" //글 상세 조회
                 ); // 인증 인터셉터를 동작시키지 않을 예외적인 uri 작성
 
         registry.addInterceptor(adminAuthorizationInterceptor) //인증 인터셉터 다음 인가 인터셉터 실행
                 .order(2)
-                .addPathPatterns("/api/admin/**"); //어떤 uri에 대해 인가 인터셉터를 동작하게 할 것인가?
+                .addPathPatterns("/api/post/post", //어떤 uri에 대해 인가 인터셉터를 동작하게 할 것인가?
+                        "api/post/edit/{post-id}",
+                        "api/post/delete/{post-id}");
     }
 
     @Override

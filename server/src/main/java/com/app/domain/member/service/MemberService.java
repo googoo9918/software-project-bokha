@@ -144,6 +144,22 @@ public class MemberService {
         return findVerifiedMemberByMemberId(memberId);
     }
     /**
+     * 로그인한 회원 Role 조회(USER OR counselor)
+     * */
+    @Transactional(readOnly = true)
+    public Role getLoginRole(HttpServletRequest httpServletRequest) {
+        String authorizationHeader = httpServletRequest.getHeader("Authorization");
+        String accessToken = authorizationHeader.split(" ")[1];
+
+        Claims tokenClaims = tokenManager.getTokenClaims(accessToken);
+        String role = (String) tokenClaims.get("role");
+        if(role.equals("USER")) {
+            return (Role) Enum.valueOf(Role.class, role);
+        }else{
+            return (Role) Enum.valueOf(Role.class, "ADMIN");
+        }
+    }
+    /**
      * 회원 중복 확인(있으면 예외)
      */
     private void validateDuplicateMember(Member member) {

@@ -27,8 +27,10 @@ public enum ErrorCode {
     MEMBER_WITHDRAWN(HttpStatus.BAD_REQUEST, "M-004", "해당 회원은 탈퇴한 회원입니다"),
 
     //프로그램
-    ALREADY_REGISTERED_PROGRAM(HttpStatus.BAD_REQUEST, "P-001", "이미 등록된 프로그램 입니다.");
+    ALREADY_REGISTERED_PROGRAM(HttpStatus.BAD_REQUEST, "P-001", "이미 등록된 프로그램 입니다."),
 
+    //Post
+    POST_NOT_EXISTS(HttpStatus.BAD_REQUEST, "p-001", "해당 글은 존재하지 않습니다.");
     ErrorCode(HttpStatus httpStatus, String errorCode, String message) {
         this.httpStatus = httpStatus;
         this.errorCode = errorCode;

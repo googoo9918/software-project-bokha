@@ -17,7 +17,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update # 애플리케이션 실행 시 기존 테이블 삭제 후 테이블 새로 생성
+      ddl-auto: create
       # 추후 validate나 none으로 변경할 것
     show-sql: true # 콘솔창에 sql 출력
     properties:
@@ -27,6 +27,7 @@ spring:
         # 쿼리에서 조건문 in절로 수행하게됨, n번 쿼리 수행 -> 1번 쿼리에서 수행(n개를 파라미터로 넣어줌)
         # DB와 애플리케이션 부하를 고려해서 개수를 설정할 것
         # oracle의 경우 최대 1000개
+    defer-datasource-initialization: true
   servlet:
     multipart:
       max-file-size: 10MB # 파일 업로드 요청 시 하나의 파일 크기를 10MB 제한
