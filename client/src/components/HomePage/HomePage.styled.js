@@ -28,3 +28,16 @@ export const VideoBg = styled.video`
   object-fit: cover;
   background: #232a34;
 `;
+
+export const MainPageDescription = styled.div`
+  position: absolute;
+  top: 100px;
+  left: 110px;
+`;
+
+export const welSearchButtonDiv = styled.div`
+  position: absolute;
+  top: 500px;
+  left: 110px;
+  background-color: red;
+`;
