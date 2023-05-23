@@ -20,13 +20,20 @@ public enum ErrorCode {
     PASSWORD_MISMATCH(HttpStatus.UNAUTHORIZED, "A-009", "비밀번호가 일치하지 않습니다."),
     WRONG_PASSWROD(HttpStatus.UNAUTHORIZED, "A-010", "잘못된 비밀번호 입니다."),
 
+
     // 회원
     INVALID_MEMBER_TYPE(HttpStatus.BAD_REQUEST, "M-001", "잘못된 회원 타입 입니다.(memberType : KAKAO)"),
     ALREADY_REGISTERED_MEMBER(HttpStatus.BAD_REQUEST, "M-002", "이미 가입된 회원 입니다."),
     MEMBER_NOT_EXISTS(HttpStatus.BAD_REQUEST, "M-003", "해당 회원은 존재하지 않습니다."),
-    MEMBER_WITHDRAWN(HttpStatus.BAD_REQUEST, "M-004", "해당 회원은 탈퇴한 회원입니다")
-    ;
+    MEMBER_WITHDRAWN(HttpStatus.BAD_REQUEST, "M-004", "해당 회원은 탈퇴한 회원입니다"),
 
+    ADMIN_NOT_DELETE(HttpStatus.BAD_REQUEST, "M-005", "관리자 계정은 삭제가 불가능합니다"),
+
+    //프로그램
+    ALREADY_REGISTERED_PROGRAM(HttpStatus.BAD_REQUEST, "P-001", "이미 등록된 프로그램 입니다."),
+
+    //Post
+    POST_NOT_EXISTS(HttpStatus.BAD_REQUEST, "p-001", "해당 글은 존재하지 않습니다.");
     ErrorCode(HttpStatus httpStatus, String errorCode, String message) {
         this.httpStatus = httpStatus;
         this.errorCode = errorCode;
