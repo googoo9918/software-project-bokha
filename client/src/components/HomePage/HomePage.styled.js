@@ -4,7 +4,7 @@ export const HomeView = styled.div`
   overflow: hidden;
   position: absolute;
   width: 100%;
-  top: 70px;
+  // top: 70px;
 `;
 export const HomeContainer = styled.div`
   height: 400vh;

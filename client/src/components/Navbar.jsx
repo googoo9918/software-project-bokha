@@ -26,7 +26,7 @@ export default function Navbar() {
 
   const handleScroll = () => {
     const currentScrollPos = window.pageYOffset;
-    if (currentScrollPos > 150) {
+    if (currentScrollPos > 50) {
       setVisible(false);
     } else {
       setVisible(true);

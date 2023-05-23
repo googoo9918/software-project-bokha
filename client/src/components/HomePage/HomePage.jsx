@@ -36,6 +36,15 @@ export default function HomePage() {
   const navigate = useNavigate();
   return (
     <>
+      <div
+        style={{
+          backgroundColor: "#CEE5D0",
+          width: "100%",
+          height: "500px",
+          position: "fixed",
+          // top: "-200px",
+        }}
+      ></div>
       <HomeView>
         <HomeContainer>
           <HomeBox id="1" style={{ backgroundColor: "#CEE5D0" }}>
