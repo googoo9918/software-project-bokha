@@ -42,7 +42,7 @@ public class ProgramController {
      * @return
      */
     @GetMapping("/list")
-    public ResponseEntity getPrograms(@ModelAttribute ProgramDto.ListRequest listRequest){
+    public ResponseEntity getPrograms(@ModelAttribute ProgramDto.ListRequest listRequest,HttpServletRequest httpServletRequest){
         ProgramDto.ListRequest programListRequestDto = ProgramDto.ListRequest.builder()
                 .serviceKey(listRequest.getServiceKey())
                 .pageNo(listRequest.getPageNo())
@@ -58,14 +58,23 @@ public class ProgramController {
                 .arrgOrd(listRequest.getArrgOrd())
                 .build();
 
+        if(memberService.checkLogin(httpServletRequest)){
+            Member member = memberService.getLoginMember(httpServletRequest);
+            ProgramDto.ListResponse programListResponse = programRetrieveClient.getList(programListRequestDto);
+            // 추가 메서드
+            return new ResponseEntity<>(
+                    new SingleResponseDto<>(programListResponse), HttpStatus.OK
+            );
+        }
         ProgramDto.ListResponse programListResponse = programRetrieveClient.getList(programListRequestDto);
+
         return new ResponseEntity<>(
                 new SingleResponseDto<>(programListResponse), HttpStatus.OK
         );
     }
 
     /**
-     * 회원 별 프로그램 추천
+     * 회원 별 프로그램 추천 목록 조회
      */
     @GetMapping("/recommendlist")
     public ResponseEntity getPrograms(@ModelAttribute ProgramDto.RecommendListRequest recommendListRequest, HttpServletRequest httpServletRequest){
@@ -81,7 +90,7 @@ public class ProgramController {
                 .build();
 
         ProgramDto.ListResponse programListResponse = programRetrieveClient.getRecommendList(programRecommendListRequestDto);
-
+        //TODO:로그인한 회원 기준이므로 if로 분기처리 하지 않아도 됨, 즐겨찾기 확인 메서드만 추가
         return new ResponseEntity<>(
                 new SingleResponseDto<>(programListResponse), HttpStatus.OK
         );

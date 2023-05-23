@@ -25,6 +25,7 @@ public class ProgramService {
 
     public Program saveProgram(Program program, Member member){
         program.setMember(member);
+        program.setLiked(true);
         validateDuplicateSaveProgram(program, member);
         return programRepository.save(program);
     }
