@@ -11,6 +11,7 @@ export const HomeContainer = styled.div`
   transition: all 1s;
 `;
 export const HomeBox = styled.div`
+  position: relative;
   height: 100vh;
   float: top;
 `;
@@ -37,7 +38,7 @@ export const MainPageDescription = styled.div`
 
 export const ButtonContainer = styled.div`
   position: absolute;
-  top: 350px;
+  top: 400px;
   left: 110px;
   display: flex;
 `;
@@ -89,5 +90,57 @@ export const ButtonTitle = styled.div`
 
 export const Page2Description = styled.div`
   position: absolute;
-  top: 120px;
+  top: 220px;
+  left: 550px;
+`;
+
+export const Page2Title = styled.div`
+  font-size: 80px;
+  font-weight: bold;
+  margin-bottom: 52px;
+`;
+
+export const Page2Content = styled.div`
+  font-size: 20px;
+`;
+
+export const Page2ImageSection = styled.div`
+  position: absolute;
+  top: 250px;
+  left: 120px;
+  height: 350px;
+`;
+
+export const ShortCutButton = styled.button`
+  width: 250px;
+  height: 80px;
+  border-radius: 50px;
+  font-size: 30px;
+  cursor: pointer;
+  border: none;
+`;
+
+export const Page3Description = styled.div`
+  position: absolute;
+  top: 150px;
+  left: 150px;
+`;
+export const Page3Title = styled.div`
+  font-size: 80px;
+  font-weight: bold;
+  margin-bottom: 52px;
+  color: white;
+`;
+export const Page3Content = styled.div`
+  font-size: 25px;
+  color: #f0f0f0;
+`;
+export const Page4ImageSection = styled.div`
+  position: absolute;
+  top: 250px;
+  left: 700px;
+  background-color: white;
+  border-radius: 100%;
+  width: 400px;
+  height: 400px;
 `;

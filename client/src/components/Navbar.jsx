@@ -74,7 +74,7 @@ export default function Navbar() {
             href="/search"
             sx={rightLink}
           >
-            {"복지 검색🔍"}
+            {"복지 검색 🔍"}
           </Link>
           <Link
             color="inherit"
@@ -83,7 +83,7 @@ export default function Navbar() {
             href="/map"
             sx={rightLink}
           >
-            {"복지 지도🗺️"}
+            {"복지 지도 🗺️"}
           </Link>
           <Link
             color="inherit"
@@ -92,7 +92,7 @@ export default function Navbar() {
             href="/notice"
             sx={rightLink}
           >
-            {"공지사항📍"}
+            {"공지사항 📍"}
           </Link>
           <Link
             color="inherit"
@@ -101,7 +101,7 @@ export default function Navbar() {
             href="/mypage"
             sx={rightLink}
           >
-            {"마이페이지⭐"}
+            {"마이페이지 ⭐"}
           </Link>
         </Box>
         <Box
@@ -117,7 +117,7 @@ export default function Navbar() {
             href="/sign-in"
             sx={{ marginRight: 5 }}
           >
-            {"Sign In"}
+            {"로그인"}
           </Link>
           <Link
             color="#000000"
@@ -126,7 +126,7 @@ export default function Navbar() {
             href="/sign-up"
             sx={{ rightLink }}
           >
-            {"Sign Up"}
+            {"회원가입"}
           </Link>
         </Box>
       </Toolbar>
