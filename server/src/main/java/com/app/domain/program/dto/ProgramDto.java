@@ -194,6 +194,10 @@ public class ProgramDto {
 
         //즐겨찾기 여부
         private Boolean liked;
+
+        public void checkLike(boolean liked){
+            this.liked = liked;
+        }
     }
 
     @XmlRootElement(name = "wantedDtl")

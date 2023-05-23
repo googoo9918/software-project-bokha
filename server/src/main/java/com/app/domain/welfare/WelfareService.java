@@ -1,6 +1,10 @@
 package com.app.domain.welfare;
 
+import com.app.domain.member.entity.Member;
 import com.app.domain.member.repository.MemberRepository;
+import com.app.domain.program.client.ProgramRetrieveClient;
+import com.app.domain.program.dto.ProgramDto;
+import com.app.domain.program.repository.ProgramRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
@@ -45,8 +49,12 @@ public class WelfareService {
 
     private final WordAnalysisService wordAnalysisService;
 
+    private final ProgramRetrieveClient programRetrieveClient;
 
-    public List<Welfare> searchWelfareByVoice(MultipartFile multipartFile) throws Exception {
+    private final ProgramRepository programRepository;
+
+
+    public List<Welfare> searchWelfareByVoice(MultipartFile multipartFile,Member member) throws Exception {
         if (!isValidWavFile(multipartFile)) {
             throw new RuntimeException("WAV 형식의 파일이 아닙니다!");
         }
@@ -110,6 +118,11 @@ public class WelfareService {
         }
 
         log.info("searchWrd={}", searchWrd);
+        if (member==null){
+            return callWelfareApi(searchWrd);
+        }else {
+           return callWelfareApi(searchWrd,member);
+        }
         String parseWelfare = callWelfareApi(searchWrd);
         List<Welfare> welfareList = parseWelfareXml(parseWelfare);
 
@@ -117,7 +130,7 @@ public class WelfareService {
 
     }
 
-    private String callWelfareApi(String searchWrd) {
+    private String callWelfareApi(String searchWrd, Member member) {
 
         StringBuilder urlBuilder = new StringBuilder(
             "https://apis.data.go.kr/B554287/LocalGovernmentWelfareInformations/LcgvWelfarelist");
@@ -140,29 +153,72 @@ public class WelfareService {
         urlBuilder.append(
             "&" + URLEncoder.encode("arrgOrd", StandardCharsets.UTF_8) + "=" + URLEncoder.encode(
                 "001", StandardCharsets.UTF_8));
+
+
         StringBuilder result = new StringBuilder();
 
-        try {
-            URL url = new URL(urlBuilder.toString());
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "*/*;q=0.9");
+        ProgramDto.ListRequest programListRequestDto = ProgramDto.ListRequest.builder()
+            .serviceKey("AeXDUH1p76XogolMY0RiiAfGZEvBXlMLm6q5%2FwE9NqSid7KE4CtaiTIlaRTSPmuU9EsIOFFkO0r7ES1hY%2Fo1ag%3D%3D")
+            .pageNo("1")
+            .numOfRows("5")
+            .lifeArray("005,006")
+            .srchKeyCode("003")
+            .searchWrd(searchWrd)
+            .arrgOrd("001")
+            .build();
 
-            BufferedReader br = new BufferedReader(
-                new InputStreamReader(conn.getInputStream(), "UTF-8"));
+        ProgramDto.ListResponse programListResponse = programRetrieveClient.getList(programListRequestDto);
 
-            String line;
-            while ((line = br.readLine()) != null) {
-                result.append(line);
+//        try {
+//            URL url = new URL(urlBuilder.toString());
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            conn.setRequestMethod("GET");
+//            conn.setRequestProperty("Accept", "*/*;q=0.9");
+//
+//            BufferedReader br = new BufferedReader(
+//                new InputStreamReader(conn.getInputStream(), "UTF-8"));
+//
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                result.append(line);
+//            }
+//
+//            br.close();
+//            conn.disconnect();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        log.info("result = {}", result.toString());
+
+        List<String> serviceIdList = programRepository.findByMember(member);
+
+        for (ProgramDto.ServList p: programListResponse.getServList()) {
+            if (serviceIdList.contains(p.getServId())){
+                    p.checkLike(true);
+            }else {
+                p.checkLike(false);
             }
-
-            br.close();
-            conn.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+        return result.toString();
+    }
 
-        log.info("result = {}", result.toString());
+    private String callWelfareApi(String searchWrd) {
+
+
+        ProgramDto.ListRequest programListRequestDto = ProgramDto.ListRequest.builder()
+            .serviceKey("AeXDUH1p76XogolMY0RiiAfGZEvBXlMLm6q5%2FwE9NqSid7KE4CtaiTIlaRTSPmuU9EsIOFFkO0r7ES1hY%2Fo1ag%3D%3D")
+            .pageNo("1")
+            .numOfRows("5")
+            .lifeArray("005,006")
+            .srchKeyCode("003")
+            .searchWrd(searchWrd)
+            .arrgOrd("001")
+            .build();
+
+        ProgramDto.ListResponse programListResponse = programRetrieveClient.getList(programListRequestDto);
+
+
         return result.toString();
     }
 
