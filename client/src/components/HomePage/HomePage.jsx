@@ -5,11 +5,20 @@ import {
   HomeContainer,
   VideoBg,
   MainPageDescription,
-  welSearchButtonDiv,
+  ButtonContainer,
+  ButtonCircle,
+  ButtonFlipCircle,
+  IconImg,
+  ButtonTitle,
+  Page2Description,
 } from "./HomePage.styled";
 // import Navbar from "../Navbar";
+import { Link } from "react-scroll";
 import Video from "../../video/video01.mp4";
 import Side from "./Side";
+import SearchIcon from "../../assets/검색 아이콘.png";
+import LocationIcon from "../../assets/위치 아이콘.png";
+import VoiceIcon from "../../assets/음성 아이콘.png";
 
 export default function HomePage() {
   return (
@@ -38,9 +47,41 @@ export default function HomePage() {
                 찾아드리겠습니다!
               </span>
             </MainPageDescription>
-            {/* <welSearchButtonDiv>
-              <button>복지 검색</button>
-            </welSearchButtonDiv> */}
+            <ButtonContainer>
+              <Link to="2" spy={true} smooth={true}>
+                <ButtonFlipCircle>
+                  <ButtonCircle
+                    className="flip"
+                    style={{ backgroundColor: "#FFBF86" }}
+                  >
+                    <IconImg src={SearchIcon} />
+                    <ButtonTitle className="back">복지 검색</ButtonTitle>
+                  </ButtonCircle>
+                </ButtonFlipCircle>
+              </Link>
+              <Link to="3" spy={true} smooth={true}>
+                <ButtonFlipCircle>
+                  <ButtonCircle
+                    className="flip"
+                    style={{ backgroundColor: "#F3F0D7" }}
+                  >
+                    <IconImg src={LocationIcon} />
+                    <ButtonTitle className="back">복지 지도</ButtonTitle>
+                  </ButtonCircle>
+                </ButtonFlipCircle>
+              </Link>
+              <Link to="4" spy={true} smooth={true}>
+                <ButtonFlipCircle>
+                  <ButtonCircle
+                    className="flip"
+                    style={{ backgroundColor: "#FED2AA" }}
+                  >
+                    <IconImg src={VoiceIcon} />
+                    <ButtonTitle className="back">음성 검색</ButtonTitle>
+                  </ButtonCircle>
+                </ButtonFlipCircle>
+              </Link>
+            </ButtonContainer>
           </HomeBox>
           <HomeBox id="2" style={{ backgroundColor: "#F3F0D7" }}></HomeBox>
           <HomeBox id="3">

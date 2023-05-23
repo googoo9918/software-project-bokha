@@ -31,13 +31,63 @@ export const VideoBg = styled.video`
 
 export const MainPageDescription = styled.div`
   position: absolute;
-  top: 100px;
+  top: 120px;
   left: 110px;
 `;
 
-export const welSearchButtonDiv = styled.div`
+export const ButtonContainer = styled.div`
   position: absolute;
-  top: 500px;
+  top: 350px;
   left: 110px;
-  background-color: red;
+  display: flex;
+`;
+
+export const ButtonFlipCircle = styled.div`
+  width: 300px;
+  height: 300px;
+  border-radius: 100%;
+  perspective: 1000px;
+  margin: 20px;
+`;
+
+export const ButtonCircle = styled.div`
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: 0.5s;
+
+  &:hover {
+    transform: rotateY(180deg);
+  }
+`;
+
+export const IconImg = styled.img`
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  backface-visibility: hidden;
+`;
+export const ButtonTitle = styled.div`
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  font-weight: bold;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+`;
+
+export const Page2Description = styled.div`
+  position: absolute;
+  top: 120px;
 `;
