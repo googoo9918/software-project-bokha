@@ -143,6 +143,14 @@ public class MemberService {
         Long memberId = Long.valueOf( (Integer) tokenClaims.get("memberId"));
         return findVerifiedMemberByMemberId(memberId);
     }
+
+    public boolean checkLogin(HttpServletRequest httpServletRequest){
+        String authorizationHeader = httpServletRequest.getHeader("Authorization");
+        if(authorizationHeader == null){
+            return false;
+        }
+        return true;
+    }
     /**
      * 로그인한 회원 Role 조회(USER OR counselor)
      * */
