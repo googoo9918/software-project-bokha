@@ -193,7 +193,7 @@ public class ProgramDto {
         private String trgterIndvdlNmArray;
 
         //즐겨찾기 여부
-        private Boolean liked;
+        private Boolean liked = false;
 
         public void checkLike(boolean liked){
             this.liked = liked;

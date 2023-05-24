@@ -1,20 +1,23 @@
-package com.app.domain.welfare;
+package com.app.domain.welfare.controller;
 
 import static com.app.domain.common.ApiResult.*;
 
 import com.app.domain.common.ApiResult;
 import com.app.domain.member.entity.Member;
 import com.app.domain.member.service.MemberService;
-import java.util.List;
+import com.app.domain.program.dto.ProgramDto.ListResponse;
+import com.app.domain.welfare.service.WelfareService;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/programs")
 public class WelfareController {
 
 
@@ -23,17 +26,15 @@ public class WelfareController {
     private final MemberService memberService;
 
 
-
-    @PostMapping("/upload")
-    public ApiResult<List<Welfare>> uploadFile(@RequestParam("file") MultipartFile file,
+    @PostMapping("/searchByVoice")
+    public ApiResult<ListResponse> uploadFile(@RequestParam("file") MultipartFile file,
         HttpServletRequest httpServletRequest) throws Exception {
         if (memberService.checkLogin(httpServletRequest)){
             Member loginMember = memberService.getLoginMember(httpServletRequest);
-            welfareService.searchWelfareByVoice(file,loginMember);
+             return OK(welfareService.searchWelfareByVoice(file,loginMember));
         }else {
-            List<Welfare> welfare = welfareService.searchWelfareByVoice(file,null);
+            return OK(welfareService.searchWelfareByVoice(file,null));
         }
-        return OK(welfare);
     }
 
 

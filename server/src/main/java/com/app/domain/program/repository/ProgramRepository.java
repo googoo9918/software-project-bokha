@@ -17,6 +17,6 @@ public interface ProgramRepository extends JpaRepository<Program, Long> {
 
     Optional<Program> findByServIdAndMemberMemberId(String servId, long memberId);
 
-    @Query(value = "select p.servNm from program p where member_id = :member")
-    List<String> findByMember(Member member);
+    @Query(value = "select p.serv_id from program p where member_id = :memberId",nativeQuery = true)
+    List<String> findByMember(long memberId);
 }

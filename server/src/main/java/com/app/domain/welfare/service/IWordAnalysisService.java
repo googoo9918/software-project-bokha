@@ -1,4 +1,4 @@
-package com.app.domain.welfare;
+package com.app.domain.welfare.service;
 
 import java.util.List;
 import java.util.Map;

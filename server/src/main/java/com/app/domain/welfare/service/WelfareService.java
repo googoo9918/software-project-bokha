@@ -1,43 +1,33 @@
-package com.app.domain.welfare;
+package com.app.domain.welfare.service;
 
 import com.app.domain.member.entity.Member;
-import com.app.domain.member.repository.MemberRepository;
 import com.app.domain.program.client.ProgramRetrieveClient;
 import com.app.domain.program.dto.ProgramDto;
+import com.app.domain.program.dto.ProgramDto.ListResponse;
 import com.app.domain.program.repository.ProgramRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 @Service
 @RequiredArgsConstructor
@@ -53,8 +43,20 @@ public class WelfareService {
 
     private final ProgramRepository programRepository;
 
+    @Value("${welfare.serviceKey}")
+    private String serviceKey;
 
-    public List<Welfare> searchWelfareByVoice(MultipartFile multipartFile,Member member) throws Exception {
+    private final String pageNo = "1";
+    private final String numOfRows = "5";
+
+    private final String lifeArray = "005,006";
+
+    private final String srchKeyCode = "003";
+
+    private final String arrgOrd = "001";
+
+    public ListResponse searchWelfareByVoice(MultipartFile multipartFile, Member member)
+        throws Exception {
         if (!isValidWavFile(multipartFile)) {
             throw new RuntimeException("WAV 형식의 파일이 아닙니다!");
         }
@@ -118,133 +120,52 @@ public class WelfareService {
         }
 
         log.info("searchWrd={}", searchWrd);
-        if (member==null){
+        if (member == null) {
             return callWelfareApi(searchWrd);
-        }else {
-           return callWelfareApi(searchWrd,member);
+        } else {
+            return callWelfareApi(searchWrd, member);
         }
-        String parseWelfare = callWelfareApi(searchWrd);
-        List<Welfare> welfareList = parseWelfareXml(parseWelfare);
-
-        return welfareList;
 
     }
 
-    private String callWelfareApi(String searchWrd, Member member) {
-
-        StringBuilder urlBuilder = new StringBuilder(
-            "https://apis.data.go.kr/B554287/LocalGovernmentWelfareInformations/LcgvWelfarelist");
-        urlBuilder.append("?" + URLEncoder.encode("serviceKey", StandardCharsets.UTF_8)
-            + "=AeXDUH1p76XogolMY0RiiAfGZEvBXlMLm6q5%2FwE9NqSid7KE4CtaiTIlaRTSPmuU9EsIOFFkO0r7ES1hY%2Fo1ag%3D%3D");
-        urlBuilder.append(
-            "&" + URLEncoder.encode("pageNo", StandardCharsets.UTF_8) + "=" + URLEncoder.encode("1",
-                StandardCharsets.UTF_8));
-        urlBuilder.append(
-            "&" + URLEncoder.encode("numOfRows", StandardCharsets.UTF_8) + "=" + URLEncoder.encode(
-                "10", StandardCharsets.UTF_8));
-        urlBuilder.append(
-            "&" + URLEncoder.encode("lifeArray", StandardCharsets.UTF_8) + "=" + URLEncoder.encode(
-                "005,006", StandardCharsets.UTF_8));
-        urlBuilder.append("&" + URLEncoder.encode("srchKeyCode", StandardCharsets.UTF_8) + "="
-            + URLEncoder.encode("003", StandardCharsets.UTF_8));
-        urlBuilder.append(
-            "&" + URLEncoder.encode("searchWrd", StandardCharsets.UTF_8) + "=" + URLEncoder.encode(
-                searchWrd, StandardCharsets.UTF_8));
-        urlBuilder.append(
-            "&" + URLEncoder.encode("arrgOrd", StandardCharsets.UTF_8) + "=" + URLEncoder.encode(
-                "001", StandardCharsets.UTF_8));
-
-
-        StringBuilder result = new StringBuilder();
+    private ListResponse callWelfareApi(String searchWrd, Member member) {
 
         ProgramDto.ListRequest programListRequestDto = ProgramDto.ListRequest.builder()
-            .serviceKey("AeXDUH1p76XogolMY0RiiAfGZEvBXlMLm6q5%2FwE9NqSid7KE4CtaiTIlaRTSPmuU9EsIOFFkO0r7ES1hY%2Fo1ag%3D%3D")
-            .pageNo("1")
-            .numOfRows("5")
-            .lifeArray("005,006")
-            .srchKeyCode("003")
+            .serviceKey(serviceKey)
+            .pageNo(pageNo)
+            .numOfRows(numOfRows)
+            .lifeArray(lifeArray)
+            .srchKeyCode(srchKeyCode)
             .searchWrd(searchWrd)
-            .arrgOrd("001")
+            .arrgOrd(arrgOrd)
             .build();
 
-        ProgramDto.ListResponse programListResponse = programRetrieveClient.getList(programListRequestDto);
+        ProgramDto.ListResponse programListResponse = programRetrieveClient.getList(
+            programListRequestDto);
 
-//        try {
-//            URL url = new URL(urlBuilder.toString());
-//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//            conn.setRequestMethod("GET");
-//            conn.setRequestProperty("Accept", "*/*;q=0.9");
-//
-//            BufferedReader br = new BufferedReader(
-//                new InputStreamReader(conn.getInputStream(), "UTF-8"));
-//
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                result.append(line);
-//            }
-//
-//            br.close();
-//            conn.disconnect();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        log.info("result = {}", result.toString());
+        List<String> serviceIdList = programRepository.findByMember(member.getMemberId());
 
-        List<String> serviceIdList = programRepository.findByMember(member);
-
-        for (ProgramDto.ServList p: programListResponse.getServList()) {
-            if (serviceIdList.contains(p.getServId())){
-                    p.checkLike(true);
-            }else {
-                p.checkLike(false);
-            }
+        for (ProgramDto.ServList p : programListResponse.getServList()) {
+            p.checkLike(serviceIdList.contains(p.getServId()));
         }
-        return result.toString();
+        return programListResponse;
     }
 
-    private String callWelfareApi(String searchWrd) {
-
+    private ListResponse callWelfareApi(String searchWrd) {
 
         ProgramDto.ListRequest programListRequestDto = ProgramDto.ListRequest.builder()
-            .serviceKey("AeXDUH1p76XogolMY0RiiAfGZEvBXlMLm6q5%2FwE9NqSid7KE4CtaiTIlaRTSPmuU9EsIOFFkO0r7ES1hY%2Fo1ag%3D%3D")
-            .pageNo("1")
-            .numOfRows("5")
-            .lifeArray("005,006")
-            .srchKeyCode("003")
+            .serviceKey(serviceKey)
+            .pageNo(pageNo)
+            .numOfRows(numOfRows)
+            .lifeArray(lifeArray)
+            .srchKeyCode(srchKeyCode)
             .searchWrd(searchWrd)
-            .arrgOrd("001")
+            .arrgOrd(arrgOrd)
             .build();
 
-        ProgramDto.ListResponse programListResponse = programRetrieveClient.getList(programListRequestDto);
-
-
-        return result.toString();
+        return programRetrieveClient.getList(programListRequestDto);
     }
 
-    private List<Welfare> parseWelfareXml(String xmlData) {
-        List<Welfare> welfareList = new ArrayList<>();
-        try {
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            InputStream is = new ByteArrayInputStream(xmlData.getBytes("UTF-8"));
-            Document doc = dBuilder.parse(is);
-            doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName("servList");
-
-            for (int i = 0; i < nList.getLength(); i++) {
-                Node nNode = nList.item(i);
-
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    welfareList.add(Welfare.Of(eElement));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return welfareList;
-    }
 
     private String getToken() throws IOException {
 
@@ -352,26 +273,12 @@ public class WelfareService {
             ? httpConn.getInputStream()
             : httpConn.getErrorStream();
         Scanner s = new Scanner(responseStream).useDelimiter("\\A");
-        String response = s.hasNext() ? s.next() : "";
+        return s.hasNext() ? s.next() : "";
 
-//        JsonNode jsonNode = objectMapper.readTree(response);
-//        log.info("response = {}",response);
-//        JsonNode utterancesNode = jsonNode.get("results").get("utterances");
-//        StringBuilder result = new StringBuilder();;
-//        for (JsonNode utterance : utterancesNode) {
-//            String msg = utterance.get("msg").asText();
-//            result.append(msg).append(" ");
-//        }
-//
-//        log.info("msg={}",result.toString());
-//
-//        return result.toString();
-
-        return response;
 
     }
 
-    private boolean isValidWavFile(MultipartFile file){
+    private boolean isValidWavFile(MultipartFile file) {
         try (InputStream is = file.getInputStream()) {
             byte[] header = new byte[12];
             if (is.read(header) != header.length) {
