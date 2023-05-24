@@ -16,6 +16,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven { url 'https://jitpack.io' }
 }
 
 ext {
@@ -31,10 +32,7 @@ dependencies {
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4' //yml 파일 암호화
 //	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 //	implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA' //entityManagerFactory의 bean을 생성
-
-	implementation 'mysql:mysql-connector-java:8.0.32'
-	runtimeOnly 'com.mysql:mysql-connector-j:8.0.32'
-
+	implementation 'com.github.shin285:KOMORAN:3.3.9'
 	implementation 'org.apache.commons:commons-text:1.8'
 	implementation 'com.navercorp.lucy:lucy-xss-servlet:2.0.0'
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
