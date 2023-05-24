@@ -157,7 +157,7 @@ export default function HomePage() {
             </Page2ImageSection>
             <div
               className="shortcut"
-              style={{ position: "absolute", top: "700px", left: "830px" }}
+              style={{ position: "absolute", top: "600px", left: "830px" }}
             >
               <ShortCutButton
                 style={{ backgroundColor: "#FFBF86", color: "white" }}
@@ -196,7 +196,7 @@ export default function HomePage() {
             </Page3Description>
             <div
               className="shortcut"
-              style={{ position: "absolute", top: "700px", left: "830px" }}
+              style={{ position: "absolute", top: "600px", left: "830px" }}
             >
               <ShortCutButton
                 style={{ backgroundColor: "#FED2AA" }}
@@ -244,7 +244,7 @@ export default function HomePage() {
             </Page4ImageSection>
             <div
               className="shortcut"
-              style={{ position: "absolute", top: "700px", left: "150px" }}
+              style={{ position: "absolute", top: "600px", left: "150px" }}
             >
               <ShortCutButton
                 style={{ backgroundColor: "#F3F0D7" }}
