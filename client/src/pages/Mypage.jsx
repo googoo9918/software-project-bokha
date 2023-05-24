@@ -6,8 +6,9 @@ export default function Mypage() {
     <Sidebar
       items={[
         { title: "마이페이지⭐" },
-        { title: "내 즐겨찾기" },
+        { title: "즐겨찾기" },
         { title: "휴지통" },
+        { title: "복지 추천" },
       ]}
     />
   );
