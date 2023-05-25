@@ -53,7 +53,7 @@ function QnABox(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <span style={{ color: "pink" }}>Q. </span>
+            <span style={{ color: "pink" }}>A. </span>
             {description}
           </DialogContentText>
         </DialogContent>
