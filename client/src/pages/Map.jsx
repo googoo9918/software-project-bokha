@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import KakaoMap from "../components/KakaoMap/KakaoMap";
+import PublicInstitutions from "../components/PublicInstitutions/PublicInstitutions";
 
 export default function Map() {
+  const [selectedItem, setSelectedItem] = useState("복지 시설");
   return (
     <>
       <Sidebar
@@ -11,8 +13,9 @@ export default function Map() {
           { title: "복지 시설" },
           { title: "공공 기관" },
         ]}
+        setSelectedItem={setSelectedItem}
       />
-      <KakaoMap />
+      {selectedItem === "복지 시설" ? <KakaoMap /> : <PublicInstitutions />}
     </>
   );
 }
