@@ -191,6 +191,13 @@ public class ProgramDto {
         // 가구 상황명
         @XmlElement(name = "trgterIndvdlNmArray")
         private String trgterIndvdlNmArray;
+
+        //즐겨찾기 여부
+        private Boolean liked = false;
+
+        public void checkLike(boolean liked){
+            this.liked = liked;
+        }
     }
 
     @XmlRootElement(name = "wantedDtl")
@@ -397,6 +404,9 @@ public class ProgramDto {
         //지자체 정보
         private String ctpvNm;
 
+        //즐겨찾기 여부
+        private Boolean liked;
+
         public static SaveResponse ofProgram(Program program){
             return SaveResponse.builder()
                     .programId(program.getProgramId())
@@ -407,7 +417,9 @@ public class ProgramDto {
                     .sprtCycnm(program.getSprtCycnm())
                     .srvPvsnNm(program.getSrvPvsnNm())
                     .aplyMtdNm(program.getAplyMtdNm())
-                    .ctpvNm(program.getCtpvNm()).build();
+                    .ctpvNm(program.getCtpvNm())
+                    .liked(program.getLiked())
+                    .build();
         }
     }
 }

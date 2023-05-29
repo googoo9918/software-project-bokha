@@ -60,7 +60,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/programs/list", // 프로그램 목록 조회
                         "/api/programs/detail", // 프로그램 상세 조회
                         "/api/post/list", //글 전체 조회
-                        "/api/post/{post-id}" //글 상세 조회
+                        "/api/post/{post-id}", //글 상세 조회
+                        "/api/programs/searchByVoice"
                 ); // 인증 인터셉터를 동작시키지 않을 예외적인 uri 작성
 
         registry.addInterceptor(adminAuthorizationInterceptor) //인증 인터셉터 다음 인가 인터셉터 실행

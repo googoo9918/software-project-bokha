@@ -54,6 +54,10 @@ public class Program extends BaseEntity {
     @Column(length = 20)
     private String sggNm;
 
+    //즐겨찾기 여부
+    @Column
+    private Boolean liked;
+
     @Builder
     public Program(long programId, String servId, String servNm, String servDgst, String sprtCycnm
             , String srvPvsnNm, String aplyMtdNm, String ctpvNm, String sggNm ){
