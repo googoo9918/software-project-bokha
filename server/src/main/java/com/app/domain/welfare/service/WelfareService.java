@@ -46,6 +46,12 @@ public class WelfareService {
     @Value("${welfare.serviceKey}")
     private String serviceKey;
 
+    @Value("${welfare.clientId}")
+    private String clientId;
+
+    @Value("${welfare.clientSecret}")
+    private String clientSecret;
+
     private final String pageNo = "1";
     private final String numOfRows = "5";
 
@@ -79,7 +85,7 @@ public class WelfareService {
                 status = jsonNode.get("status").asText();
                 // If status is not "completed", wait for another 5 seconds
                 if (!"completed".equals(status)) {
-                    Thread.sleep(10000);
+                    Thread.sleep(1000);
                 }
 
             }
@@ -169,9 +175,6 @@ public class WelfareService {
 
     private String getToken() throws IOException {
 
-        String clientId = "YLAaayqPvReeb7J3YkOM";
-        String clientSecret = "3TscXARPyk2l3cNpH1BONW_R43EkkHkbR6JSviA0";
-
         URL url = new URL("https://openapi.vito.ai/v1/authenticate");
         HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
         httpConn.setRequestMethod("POST");
@@ -179,8 +182,7 @@ public class WelfareService {
         httpConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         httpConn.setDoOutput(true);
 
-        String data = "client_id=YLAaayqPvReeb7J3YkOM&client_secret=3TscXARPyk2l3cNpH1BONW_R43EkkHkbR6JSviA0";
-        byte[] out = data.getBytes(StandardCharsets.UTF_8);
+        byte[] out = ("client_id=" + clientId + "&" + "client_secret=" + clientSecret).getBytes(StandardCharsets.UTF_8);
 
         OutputStream stream = httpConn.getOutputStream();
         stream.write(out);
