@@ -3,11 +3,13 @@ package com.app.domain.program.controller;
 import com.app.domain.common.MultiResponseDto;
 import com.app.domain.common.SingleResponseDto;
 import com.app.domain.member.entity.Member;
+import com.app.domain.member.repository.MemberRepository;
 import com.app.domain.member.service.MemberService;
 import com.app.domain.program.client.ProgramRetrieveClient;
 import com.app.domain.program.dto.ProgramDto;
 import com.app.domain.program.entity.Program;
 import com.app.domain.program.mapper.ProgramMapper;
+import com.app.domain.program.repository.ProgramRepository;
 import com.app.domain.program.service.ProgramService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -36,6 +38,7 @@ public class ProgramController {
 
     private final MemberService memberService;
 
+
     /**
      * 프로그램 목록 조회
      * @param listRequest
@@ -62,6 +65,11 @@ public class ProgramController {
             Member member = memberService.getLoginMember(httpServletRequest);
             ProgramDto.ListResponse programListResponse = programRetrieveClient.getList(programListRequestDto);
             // 추가 메서드
+            List<String> serviceIdList = programService.getServiceIdList(member.getMemberId());
+
+            for (ProgramDto.ServList p : programListResponse.getServList()) {
+                p.checkLike(serviceIdList.contains(p.getServId()));
+            }
             return new ResponseEntity<>(
                     new SingleResponseDto<>(programListResponse), HttpStatus.OK
             );
@@ -90,7 +98,13 @@ public class ProgramController {
                 .build();
 
         ProgramDto.ListResponse programListResponse = programRetrieveClient.getRecommendList(programRecommendListRequestDto);
-        //TODO:로그인한 회원 기준이므로 if로 분기처리 하지 않아도 됨, 즐겨찾기 확인 메서드만 추가
+
+        List<String> serviceIdList = programService.getServiceIdList(member.getMemberId());
+
+        for (ProgramDto.ServList p : programListResponse.getServList()) {
+            p.checkLike(serviceIdList.contains(p.getServId()));
+        }
+
         return new ResponseEntity<>(
                 new SingleResponseDto<>(programListResponse), HttpStatus.OK
         );
