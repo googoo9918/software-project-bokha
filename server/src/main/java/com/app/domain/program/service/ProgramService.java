@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -28,6 +29,11 @@ public class ProgramService {
         program.setLiked(true);
         validateDuplicateSaveProgram(program, member);
         return programRepository.save(program);
+    }
+
+    public List<String> getServiceIdList(long memberId){
+        List<String> getServiceIdList = programRepository.findByMember(memberId);
+        return getServiceIdList;
     }
 
     @Transactional(readOnly = true)
