@@ -61,7 +61,13 @@ public class ProgramController {
         if(memberService.checkLogin(httpServletRequest)){
             Member member = memberService.getLoginMember(httpServletRequest);
             ProgramDto.ListResponse programListResponse = programRetrieveClient.getList(programListRequestDto);
-            // 추가 메서드
+
+            List<String> serviceIdList = programService.getServiceIdList(member.getMemberId());
+
+            for (ProgramDto.ServList p : programListResponse.getServList()) {
+                p.checkLike(serviceIdList.contains(p.getServId()));
+            }
+
             return new ResponseEntity<>(
                     new SingleResponseDto<>(programListResponse), HttpStatus.OK
             );
@@ -90,7 +96,13 @@ public class ProgramController {
                 .build();
 
         ProgramDto.ListResponse programListResponse = programRetrieveClient.getRecommendList(programRecommendListRequestDto);
-        //TODO:로그인한 회원 기준이므로 if로 분기처리 하지 않아도 됨, 즐겨찾기 확인 메서드만 추가
+
+        List<String> serviceIdList = programService.getServiceIdList(member.getMemberId());
+
+        for (ProgramDto.ServList p : programListResponse.getServList()) {
+            p.checkLike(serviceIdList.contains(p.getServId()));
+        }
+
         return new ResponseEntity<>(
                 new SingleResponseDto<>(programListResponse), HttpStatus.OK
         );
