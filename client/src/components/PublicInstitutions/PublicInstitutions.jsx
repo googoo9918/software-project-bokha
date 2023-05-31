@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { KakaoMapView } from "./PublicInstitutions.styled";
+import { KakaoMapTitleBox, KakaoMapView } from "./PublicInstitutions.styled";
 
 export default function PublicInstitutions() {
   const [publicInstitutions, setPublicInstitutions] = useState([]);
@@ -37,8 +37,14 @@ export default function PublicInstitutions() {
   }, []);
 
   return (
-    <KakaoMapView>
-      <div id="map" style={{ width: "900px", height: "550px" }}></div>
-    </KakaoMapView>
+    <>
+      <KakaoMapTitleBox>
+        <h2>공공 기관</h2>
+        <p style={{ color: "gray" }}>주변의 공공 기관들을 확인해 보세요!</p>
+      </KakaoMapTitleBox>
+      <KakaoMapView>
+        <div id="map" style={{ width: "900px", height: "550px" }}></div>
+      </KakaoMapView>
+    </>
   );
 }
