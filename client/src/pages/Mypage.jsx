@@ -7,7 +7,6 @@ export default function Mypage() {
       items={[
         { title: "마이페이지⭐" },
         { title: "즐겨찾기" },
-        { title: "휴지통" },
         { title: "복지 추천" },
       ]}
     />
