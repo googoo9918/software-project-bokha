@@ -5,10 +5,8 @@ export const CardContainer = styled.div`
   height: 22.8125rem;
   border: 1px solid #7d7d7d;
   border-radius: 10px;
-  position: absolute;
-  // 추후 수정
-  top: 50rem;
-  left: 25rem;
+  position: relative;
+  margin: 1rem 1rem 0 0 ;
 
   #program-detail-short {
     width: 13.75rem;
@@ -25,8 +23,8 @@ export const CardContainer = styled.div`
   #program-detail-btn {
     width: 13.75rem;
     height: 2.5625rem;
-    background-color: #057598;
-    color: #fff;
+    background-color: #CEE5D0;
+    color: #000;
     border: 0;
     border-radius: 0.625rem;
     position: absolute;
@@ -60,6 +58,7 @@ export const CardHeader = styled.div`
     position: absolute;
     bottom: 0;
     right: 0;
+    cursor: pointer;
   }
   
 `;

@@ -5,7 +5,7 @@ import { useState } from "react";
 import TitleBox from "../TitleBox/TitleBox";
 import axios from "axios";
 
-export default function CategoryContainer() {
+export default function CategoryContainer(props) {
   const [household, setHousehold] = useState([]);
   const [interest, setInterest] = useState([]);
   const [age, setAge] = useState(50);
@@ -54,7 +54,9 @@ export default function CategoryContainer() {
         ctpvNm: sido,
         searchWrd: keyword
       }
-    }).then((res) => console.log(res))
+    }).then((res) => {
+      props.handler(res.data.data.servList);
+    })
     .catch((err) => console.log(err));
   }
 
