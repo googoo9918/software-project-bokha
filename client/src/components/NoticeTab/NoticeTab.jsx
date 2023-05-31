@@ -4,6 +4,7 @@ import {
   NoticeDate,
   NoticeTabView,
   NoticeTitle,
+  NoticeTitleBox,
 } from "./NoticeTab.styled";
 import axios from "axios";
 
@@ -15,11 +16,16 @@ export default function NoticeTab() {
   }, []);
 
   return (
-    <NoticeContainer>
-      {noticeList.map((notice, i) => (
-        <NoticeBox notice={notice} key={i} />
-      ))}
-    </NoticeContainer>
+    <>
+      <NoticeTitleBox>
+        <h1>공지사항</h1>
+      </NoticeTitleBox>
+      <NoticeContainer>
+        {noticeList.map((notice, i) => (
+          <NoticeBox notice={notice} key={i} />
+        ))}
+      </NoticeContainer>
+    </>
   );
 }
 

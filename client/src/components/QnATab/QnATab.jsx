@@ -4,6 +4,7 @@ import {
   QnADescription,
   QnATabView,
   QnATitle,
+  QnATitleBox,
 } from "./QnATab.styled";
 import axios from "axios";
 import Button from "@mui/material/Button";
@@ -21,11 +22,16 @@ export default function QnATab() {
   }, []);
 
   return (
-    <QnAContainer>
-      {QnAList.map((QnA, i) => (
-        <QnABox QnA={QnA} key={i} />
-      ))}
-    </QnAContainer>
+    <>
+      <QnATitleBox>
+        <h1>질의응답</h1>
+      </QnATitleBox>
+      <QnAContainer>
+        {QnAList.map((QnA, i) => (
+          <QnABox QnA={QnA} key={i} />
+        ))}
+      </QnAContainer>
+    </>
   );
 }
 
