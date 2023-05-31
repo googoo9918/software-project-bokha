@@ -1,12 +1,6 @@
 import React from "react";
-// import Container from "@mui/material/Container";
-// import Box from "@mui/material/Box";
 import Sidebar from "../components/Sidebar";
-// import CategoryBox from "../components/CategoryBox/CategoryBox";
-// import EtcBox from "../components/EtcBox/EtcBox";
-// import Paper from "../components/Paper";
-import ProgramCard from "../components/ProgramCard/ProgramCard";
-import CategoryContainer from "../components/CategoryContainer/CategoryContainer";
+import SearchContent from "../components/SearchContent/SearchContent";
 
 export default function Search() {
   return (
@@ -18,8 +12,7 @@ export default function Search() {
           { title: "음성 검색" },
         ]}
       />
-      <CategoryContainer />
-      <ProgramCard />
+      <SearchContent />
     </>
   );
 }

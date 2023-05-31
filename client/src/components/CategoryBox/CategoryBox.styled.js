@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CategoryBoxContainer = styled.div`
   font-size: 18px;
-  width: 38rem;
+  width: 46rem;
   height: 8.1rem;
   border: 1px solid #bdbdbd;
 `;
@@ -10,7 +10,7 @@ export const CategoryBoxContainer = styled.div`
 export const CategoryTitle = styled.div`
   width: inherit;
   height: 2.5rem;
-  background-color: rgba(5, 117, 152, 0.25);
+  background-color: #CEE5D0;
   position: relative;
 
   #category-box__title {
@@ -27,7 +27,7 @@ export const CategoryContent = styled.div`
   width: inherit;
 
   .active {
-    background-color: #0057ff;
+    background-color: #61A167;
     color: #fff;
   }
 `
@@ -41,4 +41,6 @@ export const CategoryBtn = styled.button`
   padding: 0 0.6rem;
   margin: 0.5556rem 0.2222rem 0 0.3333rem;
   border: 0;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
 `;

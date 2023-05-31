@@ -32,7 +32,7 @@ export const RegionSelect = styled(Select)`
 `;
 
 export const AgeBox = styled.div`
-  width: 9rem;
+  width: 10.3rem;
   height: 1.625rem;
   display: flex;
   justify-content: space-between;
@@ -76,7 +76,7 @@ export const RegionBox = styled.div`
 `;
 
 export const KeywordBox = styled.div`
-  width: 35rem;
+  width: 43rem;
   display: flex;
   justify-content: space-between;
   position: absolute;
@@ -85,7 +85,7 @@ export const KeywordBox = styled.div`
   transform: translateX(-50%);
 
   #etc-keyword__input {
-    width: 30rem;
+    width: 40rem;
     outline: none;
     border: 1px solid #7D7D7D;
     border-radius: 0.625rem;
@@ -113,10 +113,12 @@ export const ButtonBox = styled.div`
   #etc-footer__btn-reset {
     background-color: #d9d9d9;
     color: #fff;
+    cursor: pointer;
   }
 
   #etc-footer__btn-search {
-    background-color: rgba(5, 117, 152, 0.25);;
+    background-color: #CEE5D0;
     color: #000;
+    cursor: pointer;
   }
 `
