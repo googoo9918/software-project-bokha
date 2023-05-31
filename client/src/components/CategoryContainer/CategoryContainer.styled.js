@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const CategoryWrapper = styled.div`
-  width: 58.9375rem;
-  height: 37.4375rem;
+  width: 49rem;
+  height: 37rem;
   position: absolute;
-  top: 233px;
-  left: 432px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 `;
