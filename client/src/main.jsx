@@ -9,6 +9,8 @@ import Map from "./pages/Map.jsx";
 import Notice from "./pages/Notice.jsx";
 import Mypage from "./pages/Mypage.jsx";
 import DetailPage from "./pages/DetailPage.jsx";
+import SignUpPage from "./pages/SignUpPage.jsx";
+import SignInPage from "./pages/SignInPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,8 @@ const router = createBrowserRouter([
       { path: "/notice", element: <Notice /> },
       { path: "/mypage", element: <Mypage /> },
       { path: "/search/:programIdx", element: <DetailPage /> },
+      { path: "/signin", element: <SignInPage /> },
+      { path: "/signup", element: <SignUpPage /> },
     ],
   },
 ]);
