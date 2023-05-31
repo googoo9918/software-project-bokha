@@ -6,9 +6,15 @@ export const QnAContainer = styled.div`
   border-radius: 40px;
   margin-bottom: 20px;
   left: 402px;
-  top: 300px;
+  top: 210px;
   width: 850px;
   position: absolute;
+`;
+
+export const QnATitleBox = styled.div`
+  position: absolute;
+  top: 100px;
+  left: 402px;
 `;
 
 export const QnATabView = styled.div`

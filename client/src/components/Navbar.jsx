@@ -114,7 +114,7 @@ export default function Navbar() {
             color="#000000"
             variant="h6"
             underline="none"
-            href="/sign-in"
+            href="/signin"
             sx={{ marginRight: 5 }}
           >
             {"로그인"}
@@ -123,7 +123,7 @@ export default function Navbar() {
             color="#000000"
             variant="h6"
             underline="none"
-            href="/sign-up"
+            href="/signup"
             sx={{ rightLink }}
           >
             {"회원가입"}
