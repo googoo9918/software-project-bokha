@@ -43,7 +43,14 @@ export default function PublicInstitutions() {
         <p style={{ color: "gray" }}>주변의 공공 기관들을 확인해 보세요!</p>
       </KakaoMapTitleBox>
       <KakaoMapView>
-        <div id="map" style={{ width: "900px", height: "550px" }}></div>
+        <div
+          id="map"
+          style={{
+            width: "900px",
+            height: "550px",
+            border: "2px solid #cee5d0",
+          }}
+        ></div>
       </KakaoMapView>
     </>
   );

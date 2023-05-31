@@ -3,6 +3,7 @@ import { InputBox, SignUpContainer, SignUpForm } from "./SignUp.styled";
 import axios from "axios";
 import { InputLabel } from "@mui/material";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [Email, setEmail] = useState("");
@@ -11,7 +12,9 @@ export default function SignUp() {
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const [Age, setAge] = useState("");
   const [Region, setRegion] = useState("서울특별시");
-  const [button, setButton] = useState(true);
+  const [button, setButton] = useState(false);
+
+  const navigate = useNavigate();
 
   const regionList = [
     "서울특별시",
@@ -73,18 +76,20 @@ export default function SignUp() {
       //   .then((res) => {
       //     console.log(res.data);
       //   });
+      navigate("/signin");
     } else {
       alert("빈칸을 채워주세요");
     }
   };
 
   const changeButton = () => {
+    console.log(Email);
     Email.includes("@") &&
     Password.length >= 1 &&
     Age.length >= 1 &&
     Name.length >= 1
-      ? setButton(false)
-      : setButton(true);
+      ? setButton(true)
+      : setButton(false);
   };
 
   return (
@@ -101,35 +106,30 @@ export default function SignUp() {
         </h1>
         <InputBox
           placeholder="성함을 입력해 주세요"
-          value={Email}
-          onChange={onEmailHandler}
-          onKeyUp={changeButton}
+          value={Name}
+          onChange={onNameHandler}
         ></InputBox>
         <InputBox
           placeholder="이메일을 입력해 주세요"
-          value={Name}
-          onChange={onNameHandler}
-          onKeyUp={changeButton}
+          value={Email}
+          onChange={onEmailHandler}
         ></InputBox>
         <InputBox
           placeholder="비밀번호를 입력해 주세요"
           type="password"
           value={Password}
           onChange={onPasswordHandler}
-          onKeyUp={changeButton}
         ></InputBox>
         <InputBox
           placeholder="비밀번호를 확인해 주세요"
           type="password"
           value={ConfirmPassword}
           onChange={onConfirmPasswordHandler}
-          onKeyUp={changeButton}
         ></InputBox>
         <InputBox
           placeholder="나이를 입력해 주세요"
           value={Age}
           onChange={onAgeHandler}
-          onKeyUp={changeButton}
         ></InputBox>
         <select
           style={{ height: "30px", marginTop: "5px", borderRadius: "5px" }}
@@ -143,7 +143,14 @@ export default function SignUp() {
           ))}
         </select>
         <br />
-        <Button type="submit" variant="contained" color="success">
+        <Button
+          type="submit"
+          variant="contained"
+          color="success"
+          onClick={() => {
+            changeButton();
+          }}
+        >
           회원가입
         </Button>
       </SignUpForm>

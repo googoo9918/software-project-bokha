@@ -4,6 +4,10 @@ import Link from "@mui/material/Link";
 import Toolbar from "./Toolbar";
 import AppBar from "./Appbar";
 import styled from "styled-components";
+import useAuth from "../hook/useAuth";
+import Logout from "./Logout/Logout";
+import { useRecoilValue } from "recoil";
+import { isLoggedInState } from "../recoil/user";
 
 const rightLink = {
   fontSize: 24,
@@ -12,7 +16,8 @@ const rightLink = {
 };
 
 const NavbarContainer = styled.nav`
-  background: ${({ visible }) => (visible ? "#cee5d0" : "transparent")};
+  display: ${({ visible }) => (visible ? "" : "none")};
+  background: #cee5d0;
   position: fixed;
   top: 0;
   z-index: 10;
@@ -24,15 +29,19 @@ export default function Navbar() {
   const [visible, setVisible] = useState(true);
   const [containerTransform, setContainerTransform] = useState("");
 
-  const handleScroll = () => {
-    const currentScrollPos = window.pageYOffset;
-    if (currentScrollPos > 50) {
-      setVisible(false);
-    } else {
-      setVisible(true);
-    }
-    setPrevScrollPos(currentScrollPos);
-  };
+  const isLoggedIn = useRecoilValue(isLoggedInState);
+
+  // const { isLoggedIn, login, logout } = useAuth();
+
+  // const handleScroll = () => {
+  //   const currentScrollPos = window.pageYOffset;
+  //   if (currentScrollPos > 50) {
+  //     setVisible(false);
+  //   } else {
+  //     setVisible(true);
+  //   }
+  //   setPrevScrollPos(currentScrollPos);
+  // };
 
   // const handleButtonClick = () => {
   //   setContainerTransform("translateY(-100vh)");
@@ -40,6 +49,15 @@ export default function Navbar() {
   // };
 
   useEffect(() => {
+    let prevScrollPos = window.pageYOffset;
+
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      const isScrollingUp = prevScrollPos > currentScrollPos;
+
+      setVisible(isScrollingUp || currentScrollPos < 10);
+      prevScrollPos = currentScrollPos;
+    };
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -104,31 +122,35 @@ export default function Navbar() {
             {"마이페이지 ⭐"}
           </Link>
         </Box>
-        <Box
-          sx={{
-            justifyContent: "flex-end",
-            gap: 5,
-          }}
-        >
-          <Link
-            color="#000000"
-            variant="h6"
-            underline="none"
-            href="/signin"
-            sx={{ marginRight: 5 }}
+        {isLoggedIn ? (
+          <Logout />
+        ) : (
+          <Box
+            sx={{
+              justifyContent: "flex-end",
+              gap: 5,
+            }}
           >
-            {"로그인"}
-          </Link>
-          <Link
-            color="#000000"
-            variant="h6"
-            underline="none"
-            href="/signup"
-            sx={{ rightLink }}
-          >
-            {"회원가입"}
-          </Link>
-        </Box>
+            <Link
+              color="#000000"
+              variant="h6"
+              underline="none"
+              href="/signin"
+              sx={{ marginRight: 5 }}
+            >
+              {"로그인"}
+            </Link>
+            <Link
+              color="#000000"
+              variant="h6"
+              underline="none"
+              href="/signup"
+              sx={{ rightLink }}
+            >
+              {"회원가입"}
+            </Link>
+          </Box>
+        )}
       </Toolbar>
       {/* </AppBar> */}
     </NavbarContainer>

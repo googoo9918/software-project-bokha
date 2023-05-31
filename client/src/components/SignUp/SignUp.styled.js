@@ -4,8 +4,8 @@ export const SignUpContainer = styled.div`
   position: absolute;
   top: 150px;
   left: 490px;
-  width: 100%;
-  height: 100vh;
+  // width: 100%;
+  // height: 100vh;
 `;
 
 export const SignUpForm = styled.form`
