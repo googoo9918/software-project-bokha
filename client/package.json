@@ -28,6 +28,7 @@
     "react-router-dom": "^6.11.0",
     "react-scroll": "^1.8.9",
     "recoil": "^0.7.7",
+    "recoil-persist": "^4.2.0",
     "styled-components": "^5.3.10"
   },
   "devDependencies": {
