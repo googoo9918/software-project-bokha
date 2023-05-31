@@ -29,12 +29,8 @@ export const DetailInfoBox = styled.div`
   position: relative;
   font-size: 25px;
 
-  #program-info__inquiries-line {
-    margin-right: 200px;
-  }
-
   #program-info__content {
-    width: 53.625rem;
+    width: 56rem;
     height: 6.5rem;
     position: absolute;
     top: 50%;
@@ -46,7 +42,7 @@ export const DetailInfoBox = styled.div`
 `
 
 export const DetailInfoLine = styled.div`
-  width: max-content;
+  width: 23.75rem;
   height: 2.125rem;
   display: flex;
   margin-right: 64px;
@@ -57,7 +53,7 @@ export const DetailInfoLine = styled.div`
   }
   
   #program-info__inquiries {
-    margin-right: 45px;
+    margin-right: 46px;
   }
 `;
 
@@ -66,4 +62,28 @@ export const DetailContent = styled.div`
   height: max-content;
   font-size: 25px;
   margin-top: 40px;
+`
+
+export const DetailContentBlock = styled.div`
+  width: 58.3125rem;
+  height: max-content;
+  margin-bottom: 2rem;
+
+  .detail-block__title {
+    width: 16rem;
+    height: 2.3125rem;
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  .detail-block__desc {
+    width: 55rem;
+    height: max-content;
+    margin: 1rem 0 0 2rem;
+  }
+
+  #detail-block__title-link {
+    color: #5873FF;
+    cursor: pointer;
+  }
 `
