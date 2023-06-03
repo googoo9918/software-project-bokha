@@ -6,6 +6,7 @@ import com.app.domain.program.entity.Program;
 import com.app.global.error.ErrorCode;
 import com.app.domain.program.repository.ProgramRepository;
 import com.app.global.error.exception.BusinessException;
+import com.app.global.error.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,6 +42,18 @@ public class ProgramService {
         Pageable pageable = PageRequest.of(page, size, Sort.by("program_id").descending());
         Page<Program> programPage = programRepository.findAllByMember(memberId, pageable);
         return programPage;
+    }
+
+    public void deleteProgram(String servId, Long memberId){
+        Program program = programRepository.findByServIdAndMemberMemberId(servId, memberId)
+                        .orElseThrow(()-> new EntityNotFoundException(ErrorCode.PROGRAM_NOT_EXISTS));
+
+        programRepository.delete(program);
+    }
+    @Transactional(readOnly = true)
+    public Program findProgramByProgramId(Long programId){
+        return programRepository.findById(programId)
+                .orElseThrow(() -> new EntityNotFoundException(ErrorCode.PROGRAM_NOT_EXISTS));
     }
 
     /**

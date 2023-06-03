@@ -167,4 +167,14 @@ public class ProgramController {
         return new ResponseEntity<>(new MultiResponseDto<>(response, programPage), HttpStatus.OK);
 
     }
+
+    @DeleteMapping("save-off/{programId}")
+    public ResponseEntity saveOffProgram(@PathVariable("programId") @Positive Long programId
+            , HttpServletRequest httpServletRequest){
+        Member member = memberService.getLoginMember(httpServletRequest);
+        Program program = programService.findProgramByProgramId(programId);
+        programService.deleteProgram(program.getServId(), member.getMemberId());
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
