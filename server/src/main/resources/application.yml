@@ -22,7 +22,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       # 추후 validate나 none으로 변경할 것
     show-sql: true # 콘솔창에 sql 출력
     properties:

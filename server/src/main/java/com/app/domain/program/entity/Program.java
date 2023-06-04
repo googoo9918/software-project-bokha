@@ -36,7 +36,7 @@ public class Program extends BaseEntity {
 
     //지원주기
     @Column(length = 20)
-    private String sprtCycnm;
+    private String sprtCycNm;
 
     //제공유형
     @Column(length = 20)
@@ -59,13 +59,13 @@ public class Program extends BaseEntity {
     private Boolean liked;
 
     @Builder
-    public Program(long programId, String servId, String servNm, String servDgst, String sprtCycnm
+    public Program(long programId, String servId, String servNm, String servDgst, String sprtCycNm
             , String srvPvsnNm, String aplyMtdNm, String ctpvNm, String sggNm ){
         this.programId = programId;
         this.servId = servId;
         this.servNm = servNm;
         this.servDgst = servDgst;
-        this.sprtCycnm = sprtCycnm;
+        this.sprtCycNm = sprtCycNm;
         this.srvPvsnNm = srvPvsnNm;
         this.aplyMtdNm = aplyMtdNm;
         this.ctpvNm = ctpvNm;
