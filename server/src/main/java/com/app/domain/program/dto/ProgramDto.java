@@ -359,7 +359,7 @@ public class ProgramDto {
         private String servDgst;
 
         //지원주기
-        private String sprtCycnm;
+        private String sprtCycNm;
 
         //제공유형
         private String srvPvsnNm;
@@ -393,7 +393,7 @@ public class ProgramDto {
         private String servDgst;
 
         //지원주기
-        private String sprtCycnm;
+        private String sprtCycNm;
 
         //제공유형
         private String srvPvsnNm;
@@ -414,7 +414,7 @@ public class ProgramDto {
                     .memberId(program.getMember().getMemberId())
                     .servNm(program.getServNm())
                     .servDgst(program.getServDgst())
-                    .sprtCycnm(program.getSprtCycnm())
+                    .sprtCycNm(program.getSprtCycNm())
                     .srvPvsnNm(program.getSrvPvsnNm())
                     .aplyMtdNm(program.getAplyMtdNm())
                     .ctpvNm(program.getCtpvNm())
