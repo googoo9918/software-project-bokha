@@ -71,11 +71,11 @@ export default function SignUp() {
       };
       console.log(body);
 
-      // axios
-      //   .post(`${import.meta.env.VITE_APP_HOST}/api/members/new`, body)
-      //   .then((res) => {
-      //     console.log(res.data);
-      //   });
+      axios
+        .post(`${import.meta.env.VITE_APP_HOST}/api/members/new`, body)
+        .then((res) => {
+          console.log(res.data);
+        });
       navigate("/signin");
     } else {
       alert("빈칸을 채워주세요");
