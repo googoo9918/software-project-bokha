@@ -168,12 +168,18 @@ public class ProgramController {
 
     }
 
-    @DeleteMapping("save-off/{programId}")
-    public ResponseEntity saveOffProgram(@PathVariable("programId") @Positive Long programId
+    /**
+     * 프로그램 즐겨찾기 해제
+     * @param servId
+     * @param httpServletRequest
+     * @return
+     */
+    @DeleteMapping("save-off/{servId}")
+    public ResponseEntity saveOffProgram(@PathVariable("servId") String servId
             , HttpServletRequest httpServletRequest){
         Member member = memberService.getLoginMember(httpServletRequest);
-        Program program = programService.findProgramByProgramId(programId);
-        programService.deleteProgram(program.getServId(), member.getMemberId());
+        Program program = programService.findProgramByServIdAndMemberId(servId, member.getMemberId());
+        programService.deleteProgram(program.getProgramId());
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

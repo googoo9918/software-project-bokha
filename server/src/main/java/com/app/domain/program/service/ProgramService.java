@@ -44,15 +44,15 @@ public class ProgramService {
         return programPage;
     }
 
-    public void deleteProgram(String servId, Long memberId){
-        Program program = programRepository.findByServIdAndMemberMemberId(servId, memberId)
+    public void deleteProgram(Long programId){
+        Program program = programRepository.findById(programId)
                         .orElseThrow(()-> new EntityNotFoundException(ErrorCode.PROGRAM_NOT_EXISTS));
 
         programRepository.delete(program);
     }
     @Transactional(readOnly = true)
-    public Program findProgramByProgramId(Long programId){
-        return programRepository.findById(programId)
+    public Program findProgramByServIdAndMemberId(String servId, Long memberId){
+        return programRepository.findByServIdAndMemberMemberId(servId, memberId)
                 .orElseThrow(() -> new EntityNotFoundException(ErrorCode.PROGRAM_NOT_EXISTS));
     }
 
