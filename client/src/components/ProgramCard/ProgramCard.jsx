@@ -19,8 +19,6 @@ function ProgramCard(prop) {
   const { accessToken } = useAuth();
   const navigate = useNavigate();
 
-  console.log(prop.program);
-
   useEffect(() => {
     if(prop.program.liked) {
       selectStar(prop.program.liked);
@@ -68,17 +66,18 @@ function ProgramCard(prop) {
           servId: pr.servId,
           servNm: pr.servNm,
           servDgst: pr.servDgst,
-          sprtCycnm: pr.sprtCycNm,
+          sprtCycNm: pr.sprtCycNm,
           srvPvsnNm: pr.srvPvsnNm,
           aplyMtdNm: pr.aplyMtdNm,
           ctpvNm: pr.ctpvNm
         }
 
+        console.log(`Bearer ${accessToken}`);
         console.log(reqBody);
 
         axios.post(`${import.meta.env.VITE_APP_HOST}/api/programs/save`, reqBody, {
           headers: {
-            Authorization: `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`,
           }
         }).then((res) => {
           console.log(res);
