@@ -4,6 +4,9 @@ import EtcBox from "../EtcBox/EtcBox";
 import { useState } from "react";
 import TitleBox from "../TitleBox/TitleBox";
 import axios from "axios";
+import { isLoggedInState } from "../../recoil/user";
+import { useRecoilValue } from "recoil";
+import useAuth from "../../hook/useAuth";
 
 export default function CategoryContainer(props) {
   const [household, setHousehold] = useState([]);
@@ -14,6 +17,9 @@ export default function CategoryContainer(props) {
   const [sigungu, setSigungu] = useState("동작구");
   const [keyword, setKeyword] = useState("");
   const [page, setPage] = useState(1);
+  const loginState = useRecoilValue(isLoggedInState);
+  const { accessToken } = useAuth();
+  const headers = loginState ? { Authorization: `Bearer ${accessToken}` } : {};
 
   const householdCode = {
     "다문화·탈북민": "010",
@@ -53,7 +59,8 @@ export default function CategoryContainer(props) {
         age: (age == 0) ? '' : age,
         ctpvNm: sido,
         searchWrd: keyword
-      }
+      },
+      headers: headers
     }).then((res) => {
       props.handler(res.data.data.servList);
     })

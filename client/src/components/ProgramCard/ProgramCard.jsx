@@ -14,10 +14,12 @@ import { useRecoilValue } from "recoil";
 import useAuth from "../../hook/useAuth";
 
 function ProgramCard(prop) {
-  const [likedStar, setLikedStar] = useState(false);
+  const [likedStar, setLikedStar] = useState(prop.program.liked);
   const loginState = useRecoilValue(isLoggedInState);
   const { accessToken } = useAuth();
   const navigate = useNavigate();
+  
+  console.log(prop.program);
 
   useEffect(() => {
     if(prop.program.liked) {
@@ -52,8 +54,15 @@ function ProgramCard(prop) {
 
   function toggleLiked() {
     if(likedStar == true) {
-      setLikedStar(false);
       // 즐겨찾기 해제 로직
+      axios.delete(`${import.meta.env.VITE_APP_HOST}/api/programs/save-off/${prop.program.servId}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }).then((res) => {
+        console.log(res);
+        setLikedStar(false);
+      }).catch((err) => console.log(err))
       return;
     }
 
@@ -71,9 +80,6 @@ function ProgramCard(prop) {
           aplyMtdNm: pr.aplyMtdNm,
           ctpvNm: pr.ctpvNm
         }
-
-        console.log(`Bearer ${accessToken}`);
-        console.log(reqBody);
 
         axios.post(`${import.meta.env.VITE_APP_HOST}/api/programs/save`, reqBody, {
           headers: {
