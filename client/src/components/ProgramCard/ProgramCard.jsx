@@ -5,10 +5,25 @@ import {
   CardInfo
 } from "./ProgramCard.styled";
 import empty_star from "../../assets/empty_star.png";
+import filled_star from '../../assets/filled_star.png';
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { isLoggedInState } from "../../recoil/user";
+import { useRecoilValue } from "recoil";
+import useAuth from "../../hook/useAuth";
 
 function ProgramCard(prop) {
+  const [likedStar, setLikedStar] = useState(false);
+  const loginState = useRecoilValue(isLoggedInState);
+  const { accessToken } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(prop.program.liked) {
+      selectStar(prop.program.liked);
+    }
+  }, [])
 
   function goDetail() {
     navigate(`/search/${prop.program.servId}`);
@@ -23,11 +38,66 @@ function ProgramCard(prop) {
     return str;
   }
 
+  function selectStar(liked) {
+    if(liked == true) {
+      setLikedStar(true);
+      return;
+    }
+
+    if(liked == false){
+      setLikedStar(false);
+      return;
+    }
+  }
+
+  function toggleLiked() {
+    if(likedStar == true) {
+      setLikedStar(false);
+      // 즐겨찾기 해제 로직
+      return;
+    }
+
+    if(likedStar == false) {
+      if(loginState) {
+        // 즐겨찾기 등록 로직
+        const pr = prop.program;
+
+        const reqBody = {
+          servId: pr.servId,
+          servNm: pr.servNm,
+          servDgst: pr.servDgst,
+          sprtCycNm: pr.sprtCycNm,
+          srvPvsnNm: pr.srvPvsnNm,
+          aplyMtdNm: pr.aplyMtdNm,
+          ctpvNm: pr.ctpvNm
+        }
+
+        console.log(`Bearer ${accessToken}`);
+        console.log(reqBody);
+
+        axios.post(`${import.meta.env.VITE_APP_HOST}/api/programs/save`, reqBody, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          }
+        }).then((res) => {
+          console.log(res);
+          setLikedStar(true);
+        }).catch((err) => {
+          console.log(err);
+        });
+        return;
+      }
+    }
+  }
+
   return(
     <CardContainer>
       <CardHeader>
         <div id="program-title">{prop.program.servNm ? reduceLen(6, prop.program.servNm) : '복지 제도 제목'}</div>
-        <img id="program-star" src={empty_star} alt="star" />
+        <img id="program-star" 
+            src={likedStar ? filled_star : empty_star} 
+            alt="star"
+            onClick={toggleLiked} />
       </CardHeader>
       <div id="program-detail-short">{prop.program.servDgst ? reduceLen(30, prop.program.servDgst) : '복지 제도에 대한 간략한 정보가 출력됩니다.'}</div>
       <CardInfoList>

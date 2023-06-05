@@ -74,11 +74,6 @@ function ProgramDetail () {
     return str;
   }
 
-  const btnClick = () => {
-		const absoluteUrl = new URL(`http://${detailInfo.inqplHmpgReldList[0].wlfareInfoReldNm}`, window.location.href).toString();
-    window.open(absoluteUrl, "_blank");
-	}
-
   return(
     <ProgramDetailContainer>
       <DetailHeader>
