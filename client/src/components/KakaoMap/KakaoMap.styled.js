@@ -4,7 +4,7 @@ export const KakaoMapView = styled.div`
   width: 58.9375rem;
   height: 37.4375rem;
   position: absolute;
-  top: 230px;
+  top: 235px;
   left: 402px;
 `;
 

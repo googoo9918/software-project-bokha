@@ -39,7 +39,7 @@ export default function PublicInstitutions() {
   return (
     <>
       <KakaoMapTitleBox>
-        <h2>공공 기관</h2>
+        <h2>공공 기관 🏢</h2>
         <p style={{ color: "gray" }}>주변의 공공 기관들을 확인해 보세요!</p>
       </KakaoMapTitleBox>
       <KakaoMapView>

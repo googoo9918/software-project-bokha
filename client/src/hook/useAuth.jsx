@@ -45,5 +45,27 @@ export default function useAuth() {
     localStorage.removeItem("refreshToken");
   };
 
+  const handleTokenRefresh = async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_APP_HOST}/api/access-token/issue`,
+        {
+          headers: {
+            Authorization: `Bearer ${refreshToken}`,
+          },
+        }
+      );
+
+      const { access_token } = response.data;
+
+      // 새로운 access_token으로 상태와 Local Storage 업데이트
+      setAccessToken(access_token);
+      localStorage.setItem("accessToken", access_token);
+    } catch (error) {
+      console.error("토큰 재발급 실패:", error);
+      logout(); // 토큰 재발급 실패 시 로그아웃 처리
+    }
+  };
+
   return { accessToken, refreshToken, login, logout };
 }
