@@ -28,15 +28,23 @@ export default function KakaoMap() {
             position: markerPosition,
           });
 
+          console.log(institution);
+
           // const hospitalAddress = result.address_name;
           // console.log(hospitalAddress);
 
-          var iwContent =
-              '<div style="padding:5px;">Hello World! <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+          let iwContent =
+              `<div style="width:250px; height:100px; padding:10px;">
+                <div style="width:200px; font-weight:600; font-size:20px; margin-bottom:5px;" >${institution.place_name} <br></div>
+                <div>주소 : ${institution.address_name}</div>
+                <div>문의처 : ${institution.phone}</div>
+                <a href="https://map.kakao.com/link/map/${institution.place_name},${institution.y},${institution.x}" style="color:blue" target="_blank">큰지도보기</a> 
+                <a href="https://map.kakao.com/link/to/${institution.place_name},${institution.y}, ${institution.x}" style="color:blue" target="_blank">길찾기</a>
+              </div>`,
             iwRemoveable = true;
 
           // 인포윈도우를 생성합니다
-          var infowindow = new kakao.maps.InfoWindow({
+          let infowindow = new kakao.maps.InfoWindow({
             // position: iwPosition,
             content: iwContent,
             removeable: iwRemoveable,
