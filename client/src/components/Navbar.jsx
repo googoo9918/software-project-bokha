@@ -112,15 +112,19 @@ export default function Navbar() {
           >
             {"공지사항 📍"}
           </Link>
-          <Link
-            color="inherit"
-            variant="h6"
-            underline="none"
-            href="/mypage"
-            sx={rightLink}
-          >
-            {"마이페이지 ⭐"}
-          </Link>
+          {isLoggedIn ? (
+            <Link
+              color="inherit"
+              variant="h6"
+              underline="none"
+              href="/mypage"
+              sx={rightLink}
+            >
+              {"마이페이지 ⭐"}
+            </Link>
+          ) : (
+            ""
+          )}
         </Box>
         {isLoggedIn ? (
           <Logout />

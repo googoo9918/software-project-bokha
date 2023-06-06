@@ -66,13 +66,17 @@ export default function SignIn() {
         >
           로그인
         </h1>
+        <label for="email">이메일</label>
         <InputBox
           placeholder="이메일을 입력해 주세요"
+          id="email"
           value={Email}
           onChange={onEmailHandler}
         ></InputBox>
+        <label for="password">비밀번호</label>
         <InputBox
           placeholder="비밀번호를 입력해 주세요"
+          id="password"
           type="password"
           value={Password}
           onChange={onPasswordHandler}

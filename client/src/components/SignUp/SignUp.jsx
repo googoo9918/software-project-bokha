@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { InputBox, SignUpContainer, SignUpForm } from "./SignUp.styled";
+import {
+  InputBox,
+  LabelAndInput,
+  SignUpContainer,
+  SignUpForm,
+} from "./SignUp.styled";
 import axios from "axios";
 import { InputLabel } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -104,44 +109,69 @@ export default function SignUp() {
         >
           회원가입
         </h1>
-        <InputBox
-          placeholder="성함을 입력해 주세요"
-          value={Name}
-          onChange={onNameHandler}
-        ></InputBox>
-        <InputBox
-          placeholder="이메일을 입력해 주세요"
-          value={Email}
-          onChange={onEmailHandler}
-        ></InputBox>
-        <InputBox
-          placeholder="비밀번호를 입력해 주세요"
-          type="password"
-          value={Password}
-          onChange={onPasswordHandler}
-        ></InputBox>
-        <InputBox
-          placeholder="비밀번호를 확인해 주세요"
-          type="password"
-          value={ConfirmPassword}
-          onChange={onConfirmPasswordHandler}
-        ></InputBox>
-        <InputBox
-          placeholder="나이를 입력해 주세요"
-          value={Age}
-          onChange={onAgeHandler}
-        ></InputBox>
-        <select
-          style={{ height: "30px", marginTop: "5px", borderRadius: "5px" }}
-          name="region"
-          onChange={onRegionHandler}
-        >
-          {regionList.map((region) => (
-            <option key={region} value={region}>
-              {region}
-            </option>
-          ))}
-        </select>
+        <LabelAndInput>
+          <label for="name">이름</label>
+          <InputBox
+            placeholder="성함을 입력해 주세요"
+            id="name"
+            value={Name}
+            onChange={onNameHandler}
+          ></InputBox>
+        </LabelAndInput>
+        <LabelAndInput>
+          <label for="email">이메일</label>
+          <InputBox
+            placeholder="이메일을 입력해 주세요"
+            id="email"
+            value={Email}
+            onChange={onEmailHandler}
+          ></InputBox>
+        </LabelAndInput>
+        <LabelAndInput>
+          <label for="password">비밀번호</label>
+          <InputBox
+            placeholder="비밀번호를 입력해 주세요"
+            id="password"
+            type="password"
+            value={Password}
+            onChange={onPasswordHandler}
+          ></InputBox>
+        </LabelAndInput>
+        <LabelAndInput>
+          <label for="confirm-password">비밀번호 확인</label>
+          <InputBox
+            placeholder="비밀번호를 확인해 주세요"
+            id="confirm-password"
+            type="password"
+            value={ConfirmPassword}
+            onChange={onConfirmPasswordHandler}
+          ></InputBox>
+        </LabelAndInput>
+        <LabelAndInput>
+          <label for="age">나이</label>
+          <InputBox
+            placeholder="나이를 입력해 주세요"
+            id="age"
+            value={Age}
+            onChange={onAgeHandler}
+          ></InputBox>
+        </LabelAndInput>
+        <LabelAndInput>
+          <label for="region">지역</label>
+          <select
+            style={{ height: "30px", marginTop: "5px", borderRadius: "5px" }}
+            name="region"
+            id="region"
+            onChange={onRegionHandler}
+          >
+            {regionList.map((region) => (
+              <option key={region} value={region}>
+                {region}
+              </option>
+            ))}
+          </select>
+        </LabelAndInput>
+
         <br />
         <Button
           type="submit"
