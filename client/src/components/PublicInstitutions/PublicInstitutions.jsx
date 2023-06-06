@@ -25,6 +25,32 @@ export default function PublicInstitutions() {
           const marker = new window.kakao.maps.Marker({
             position: markerPosition,
           });
+
+          let iwContent =
+          `<div style="width:250px; height:100px; padding:10px;">
+            <div style="width:200px; font-weight:600; font-size:20px; margin-bottom:5px;" >${institution.place_name} <br></div>
+            <div>주소 : ${institution.address_name}</div>
+            <div>문의처 : ${institution.phone}</div>
+            <a href="https://map.kakao.com/link/map/${institution.place_name},${institution.y},${institution.x}" style="color:blue" target="_blank">큰지도보기</a> 
+            <a href="https://map.kakao.com/link/to/${institution.place_name},${institution.y}, ${institution.x}" style="color:blue" target="_blank">길찾기</a>
+          </div>`,
+          iwRemoveable = true;
+
+        // 인포윈도우를 생성합니다
+        let infowindow = new kakao.maps.InfoWindow({
+          // position: iwPosition,
+          content: iwContent,
+          removeable: iwRemoveable,
+        });
+
+        kakao.maps.event.addListener(marker, "click", function () {
+          if (infowindow.getMap()) {
+            infowindow.close();
+          } else {
+            infowindow.open(map, marker);
+          }
+        });
+
           marker.setMap(map);
         });
       }
