@@ -4,18 +4,18 @@ import KakaoMap from "../components/KakaoMap/KakaoMap";
 import PublicInstitutions from "../components/PublicInstitutions/PublicInstitutions";
 
 export default function Map() {
-  const [selectedItem, setSelectedItem] = useState("복지 시설");
+  const [selectedItem, setSelectedItem] = useState("병원 🏥");
   return (
     <>
       <Sidebar
         items={[
           { title: "복지 지도 🗺️" },
-          { title: "복지 시설" },
-          { title: "공공 기관" },
+          { title: "병원 🏥" },
+          { title: "공공 기관 🏢" },
         ]}
         setSelectedItem={setSelectedItem}
       />
-      {selectedItem === "복지 시설" ? <KakaoMap /> : <PublicInstitutions />}
+      {selectedItem === "병원 🏥" ? <KakaoMap /> : <PublicInstitutions />}
     </>
   );
 }
