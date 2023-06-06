@@ -63,9 +63,6 @@ public class WelfareService {
 
     public ListResponse searchWelfareByVoice(MultipartFile multipartFile, Member member)
         throws Exception {
-        if (!isValidWavFile(multipartFile)) {
-            throw new RuntimeException("WAV 형식의 파일이 아닙니다!");
-        }
 
         File audioFile = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
         FileOutputStream fos = new FileOutputStream(audioFile);
@@ -182,7 +179,8 @@ public class WelfareService {
         httpConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         httpConn.setDoOutput(true);
 
-        byte[] out = ("client_id=" + clientId + "&" + "client_secret=" + clientSecret).getBytes(StandardCharsets.UTF_8);
+        byte[] out = ("client_id=" + clientId + "&" + "client_secret=" + clientSecret).getBytes(
+            StandardCharsets.UTF_8);
 
         OutputStream stream = httpConn.getOutputStream();
         stream.write(out);

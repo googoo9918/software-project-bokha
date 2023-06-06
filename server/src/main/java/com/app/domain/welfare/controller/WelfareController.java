@@ -20,11 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/programs")
 public class WelfareController {
 
-
     private final WelfareService welfareService;
 
     private final MemberService memberService;
-
 
     @PostMapping("/searchByVoice")
     public ApiResult<ListResponse> uploadFile(@RequestParam("file") MultipartFile file,
