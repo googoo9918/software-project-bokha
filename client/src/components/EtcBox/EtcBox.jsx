@@ -56,7 +56,6 @@ function EtcBox(props) {
               <RegionSelect
                 label="시/도"
                 onChange={e => props.sidoHandler(e.target.value)}
-                defaultValue="서울특별시"
               >
                 <MenuItem
                   disabled
@@ -79,7 +78,6 @@ function EtcBox(props) {
               <RegionSelect
                 label="시/군/구"
                 onChange={e => props.sigunguHandler(e.target.value)}
-                defaultValue="동작구"
               >
                 <MenuItem
                   disabled
