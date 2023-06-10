@@ -22,9 +22,8 @@ function VoiceSearch() {
       const mediaRecorder = new MediaRecorder(stream);
 
       mediaRecorder.ondataavailable = function(e) {
-        // chunks.push(e.data);
-        blob = e.data;
-        console.log(blob);
+        chunks.push(e.data);
+        console.log(chunks);
       };
 
       startBtn.addEventListener('click', () => {
@@ -38,17 +37,17 @@ function VoiceSearch() {
           mediaStream.getTracks().forEach(track => track.stop())
         }
         
-        // console.log(chunks);
-        
-        // blob = new Blob(chunks[0], { 'type' : 'audio/webm' });
-        // console.log(blob);
-
+        blob = new Blob(chunks, { 'type' : 'audio/wav;codecs=pcm' });
         console.log(blob);
 
         // const formData = new FormData();
         // formData.append('file', blob, 'audio.wav');
 
-        // axios.post(`${import.meta.env.VITE_APP_HOST}/api/programs/searchByVoice`, formData)
+        // axios.post(`${import.meta.env.VITE_APP_HOST}/api/programs/searchByVoice`, formData, {
+        //   headers: {
+        //     "Content-Type": 'multipart/form-data'
+        //   }
+        // })
         // .then((res) => console.log(res))
         // .catch((err) => console.log(err));
 
