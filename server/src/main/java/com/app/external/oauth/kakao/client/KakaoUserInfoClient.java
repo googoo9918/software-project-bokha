@@ -1,6 +1,7 @@
 package com.app.external.oauth.kakao.client;
 
 import com.app.external.oauth.kakao.dto.KakaoUserInfoResponseDto;
+import com.app.global.config.JsonFeignConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
  * Authorization: Bearer ${ACCESS_TOKEN}/KakaoAK ${APP_ADMIN_KEY}
  * Content-type: application/x-www-form-urlencoded;charset=utf-8
  */
-@FeignClient(url = "https://kapi.kakao.com", name = "kakaoUserInfoClient")
+@FeignClient(url = "https://kapi.kakao.com", name = "kakaoUserInfoClient", configuration = JsonFeignConfiguration.class)
 public interface KakaoUserInfoClient {
 
     @GetMapping(value = "/v2/user/me", consumes = "application/json")

@@ -7,17 +7,22 @@ server:
 
 
 spring:
-  h2:
-    console:
-      enabled: true
-      path: /h2
+  #  h2:
+  #    console:
+  #      enabled: true
+  #      path: /h2
   datasource:
-    url: jdbc:h2:mem:test
+    #    url: jdbc:h2:mem:test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://bokha-db.cmqgrybnguge.ap-northeast-2.rds.amazonaws.com:3306/bokha_db
+    username: admin
+    password: wjdehdrb99(
+
 
 
   jpa:
     hibernate:
-      ddl-auto: create # 애플리케이션 실행 시 기존 테이블 삭제 후 테이블 새로 생성
+      ddl-auto: create
       # 추후 validate나 none으로 변경할 것
     show-sql: true # 콘솔창에 sql 출력
     properties:
@@ -27,6 +32,11 @@ spring:
         # 쿼리에서 조건문 in절로 수행하게됨, n번 쿼리 수행 -> 1번 쿼리에서 수행(n개를 파라미터로 넣어줌)
         # DB와 애플리케이션 부하를 고려해서 개수를 설정할 것
         # oracle의 경우 최대 1000개
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
   servlet:
     multipart:
       max-file-size: 10MB # 파일 업로드 요청 시 하나의 파일 크기를 10MB 제한
@@ -50,7 +60,7 @@ feign:
 kakao:
   client:
     id: ENC(2VWXhZZPewn1zK6e3ODVGcHbYJLRUmCw6zd6oc4ITu+V7LETI9sxmLLHsYbcP6s1)
-#   RESTAPI 키를 복사
+    #   RESTAPI 키를 복사
     secret: ENC(uWuzB+AjzEhpdi6RMDgNfJW/KPSkTfTPRsIECN3H09rUM3q2doWVr1WBDY/jUGtz)
 #   보안 - 코드 값 복사
 
@@ -60,5 +70,11 @@ token:
   refresh-token-expiration-time: 1209600000 # 2주 1000(ms) x 60 (s) x 60(m) x 24(h) x 14(d)
 
 jasypt:
-  password: ${PASSWORD}
+  password: sakncksjallkasdkl#$@^#*asdsiajodias2737
+#    ${PASSWORD}
 #  vmoption에 지정됨
+
+welfare:
+  serviceKey: AeXDUH1p76XogolMY0RiiAfGZEvBXlMLm6q5%2FwE9NqSid7KE4CtaiTIlaRTSPmuU9EsIOFFkO0r7ES1hY%2Fo1ag%3D%3D
+  clientId: YLAaayqPvReeb7J3YkOM
+  clientSecret: 3TscXARPyk2l3cNpH1BONW_R43EkkHkbR6JSviA0

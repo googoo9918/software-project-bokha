@@ -26,7 +26,7 @@ public class OAuthAttributes {
                 .memberName(name)
                 .email(email)
                 .memberType(memberType)
-                .profile(profile)
+//                .profile(profile)
                 .role(role)
                 .build();
     }
